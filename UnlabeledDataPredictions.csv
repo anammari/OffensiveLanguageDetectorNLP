@@ -1,0 +1,3025 @@
+id,predictedClass,predictedClassProb
+1,neutral,1
+4,neutral,1
+6,neutral,1
+8,neutral,1
+9,neutral,1
+11,neutral,1
+14,neutral,1
+15,neutral,1
+26,neutral,1
+38,neutral,1
+42,hate speech,1
+45,neutral,1
+50,neutral,1
+52,neutral,1
+53,neutral,1
+62,neutral,1
+70,neutral,1
+72,neutral,1
+73,neutral,1
+76,neutral,1
+79,neutral,1
+90,neutral,1
+92,neutral,1
+100,neutral,1
+109,neutral,1
+120,neutral,1
+126,neutral,1
+129,neutral,1
+130,neutral,1
+133,neutral,1
+134,neutral,1
+135,neutral,1
+139,neutral,1
+144,neutral,1
+145,neutral,1
+148,neutral,1
+163,neutral,1
+166,neutral,1
+169,neutral,1
+182,offensive language,1
+184,offensive language,0.975
+188,offensive language,1
+200,neutral,1
+207,neutral,1
+208,offensive language,0.482
+210,neutral,1
+226,offensive language,1
+227,neutral,1
+242,offensive language,1
+246,offensive language,0.813
+252,offensive language,1
+272,neutral,1
+275,neutral,1
+277,neutral,1
+278,neutral,1
+279,neutral,1
+286,neutral,1
+291,neutral,1
+292,neutral,1
+294,neutral,1
+303,offensive language,1
+314,offensive language,1
+322,neutral,0.951
+323,offensive language,0.27
+328,offensive language,1
+333,neutral,1
+336,offensive language,1
+339,offensive language,0.829
+341,offensive language,1
+343,offensive language,1
+346,neutral,1
+354,neutral,1
+363,neutral,1
+378,neutral,1
+379,neutral,1
+387,neutral,1
+392,neutral,1
+398,neutral,1
+399,neutral,1
+400,neutral,1
+404,neutral,1
+407,neutral,1
+409,neutral,1
+417,neutral,1
+425,neutral,1
+434,neutral,1
+439,neutral,1
+440,neutral,1
+455,neutral,1
+456,neutral,1
+458,neutral,1
+464,neutral,1
+476,neutral,1
+477,neutral,1
+479,offensive language,1
+480,offensive language,1
+489,offensive language,1
+494,offensive language,1
+502,neutral,1
+504,offensive language,0.945
+506,offensive language,0.7
+508,offensive language,1
+510,neutral,1
+512,neutral,0.801
+514,neutral,1
+520,neutral,1
+524,neutral,1
+528,neutral,1
+540,offensive language,0.657
+543,neutral,1
+547,neutral,1
+565,neutral,1
+567,neutral,1
+569,neutral,1
+573,neutral,1
+577,neutral,1
+579,neutral,1
+580,neutral,1
+581,neutral,1
+583,neutral,1
+584,neutral,1
+588,neutral,1
+589,neutral,1
+590,neutral,0.927
+594,neutral,1
+605,neutral,1
+606,neutral,1
+613,neutral,1
+615,neutral,1
+619,neutral,1
+621,neutral,1
+637,neutral,1
+643,neutral,1
+664,neutral,1
+667,neutral,1
+676,neutral,1
+678,neutral,1
+682,neutral,1
+691,neutral,1
+695,neutral,1
+703,neutral,1
+705,neutral,1
+713,neutral,1
+718,neutral,1
+722,offensive language,0.972
+728,neutral,1
+749,neutral,1
+750,neutral,1
+761,neutral,1
+763,offensive language,1
+765,offensive language,1
+781,offensive language,1
+782,offensive language,1
+787,offensive language,1
+805,offensive language,0.84
+808,offensive language,0.983
+812,neutral,1
+828,neutral,1
+830,neutral,1
+833,hate speech,1
+840,hate speech,1
+842,hate speech,1
+853,hate speech,1
+859,hate speech,1
+872,hate speech,1
+873,hate speech,0.842
+874,offensive language,1
+885,hate speech,1
+886,offensive language,1
+902,hate speech,1
+903,hate speech,1
+906,hate speech,1
+909,hate speech,0.677
+913,hate speech,1
+915,hate speech,1
+918,hate speech,1
+921,hate speech,1
+922,hate speech,1
+931,offensive language,1
+935,hate speech,1
+941,offensive language,0.772
+947,hate speech,1
+948,hate speech,1
+961,hate speech,1
+963,neutral,1
+966,hate speech,1
+969,hate speech,0.157
+970,hate speech,1
+981,offensive language,0.737
+982,hate speech,1
+984,neutral,1
+995,neutral,1
+1004,neutral,0.43
+1010,neutral,1
+1012,neutral,1
+1015,neutral,1
+1020,neutral,1
+1022,neutral,1
+1028,neutral,1
+1032,neutral,1
+1034,offensive language,0.919
+1035,neutral,1
+1036,offensive language,0.714
+1050,neutral,1
+1051,neutral,1
+1065,neutral,1
+1068,neutral,1
+1075,neutral,1
+1078,neutral,1
+1080,neutral,1
+1083,neutral,1
+1086,neutral,1
+1095,neutral,1
+1099,neutral,1
+1101,neutral,1
+1104,neutral,1
+1109,neutral,1
+1117,neutral,1
+1120,offensive language,0.681
+1121,offensive language,0.55
+1122,offensive language,1
+1126,neutral,1
+1128,neutral,1
+1129,offensive language,0.935
+1143,neutral,1
+1145,neutral,1
+1157,neutral,0.357
+1162,neutral,0.996
+1170,neutral,1
+1178,neutral,1
+1185,neutral,1
+1191,neutral,1
+1193,neutral,1
+1200,offensive language,1
+1206,neutral,1
+1208,neutral,1
+1214,neutral,1
+1216,neutral,0.313
+1217,hate speech,0.848
+1220,offensive language,0.939
+1234,hate speech,0.321
+1237,neutral,1
+1240,hate speech,1
+1243,offensive language,1
+1253,neutral,1
+1255,neutral,0.919
+1257,offensive language,0.971
+1265,neutral,1
+1269,neutral,1
+1270,hate speech,0.673
+1274,neutral,1
+1282,neutral,1
+1283,neutral,1
+1287,neutral,1
+1289,neutral,1
+1290,neutral,1
+1293,neutral,1
+1301,neutral,1
+1308,neutral,1
+1310,neutral,1
+1311,neutral,1
+1330,hate speech,0.739
+1332,neutral,1
+1335,neutral,1
+1337,neutral,1
+1338,neutral,1
+1343,neutral,1
+1344,neutral,0.576
+1360,neutral,1
+1361,neutral,1
+1371,neutral,1
+1372,neutral,1
+1373,neutral,1
+1375,neutral,1
+1385,neutral,1
+1386,hate speech,1
+1398,offensive language,1
+1404,hate speech,1
+1405,hate speech,1
+1414,hate speech,1
+1421,hate speech,1
+1432,hate speech,1
+1444,hate speech,1
+1447,hate speech,1
+1451,offensive language,0.711
+1465,hate speech,1
+1471,offensive language,1
+1494,neutral,1
+1497,neutral,1
+1499,neutral,1
+1500,neutral,1
+1503,neutral,1
+1504,neutral,1
+1505,neutral,1
+1506,neutral,1
+1508,neutral,1
+1509,neutral,1
+1510,neutral,1
+1521,neutral,1
+1525,neutral,1
+1530,neutral,1
+1531,neutral,1
+1532,neutral,0.765
+1538,hate speech,1
+1543,hate speech,0.927
+1546,hate speech,1
+1557,hate speech,1
+1558,hate speech,0.935
+1559,hate speech,1
+1560,neutral,1
+1567,offensive language,1
+1568,offensive language,1
+1570,offensive language,1
+1571,offensive language,1
+1572,hate speech,1
+1577,hate speech,1
+1588,neutral,1
+1592,neutral,1
+1601,neutral,1
+1603,neutral,1
+1610,neutral,1
+1612,neutral,1
+1615,neutral,1
+1616,neutral,1
+1617,neutral,1
+1624,neutral,1
+1637,neutral,1
+1646,neutral,1
+1654,neutral,1
+1655,offensive language,1
+1657,neutral,1
+1665,neutral,1
+1668,neutral,1
+1669,neutral,1
+1686,offensive language,0.864
+1691,offensive language,1
+1693,offensive language,1
+1694,neutral,1
+1696,neutral,1
+1698,offensive language,0.416
+1706,neutral,1
+1708,offensive language,0.6
+1710,neutral,0.928
+1711,offensive language,1
+1715,neutral,1
+1723,neutral,1
+1728,neutral,1
+1730,neutral,0.905
+1737,neutral,1
+1741,neutral,1
+1749,neutral,1
+1752,neutral,1
+1758,neutral,0.302
+1759,neutral,1
+1761,offensive language,1
+1774,neutral,1
+1776,neutral,1
+1778,hate speech,0.594
+1779,neutral,0.932
+1780,hate speech,1
+1784,neutral,1
+1786,neutral,1
+1792,neutral,1
+1793,neutral,1
+1795,hate speech,1
+1799,neutral,1
+1800,neutral,1
+1806,neutral,1
+1810,neutral,1
+1830,neutral,1
+1831,neutral,1
+1832,neutral,1
+1840,neutral,1
+1842,neutral,1
+1846,neutral,1
+1847,neutral,1
+1848,neutral,1
+1857,neutral,1
+1858,offensive language,1
+1863,neutral,1
+1876,neutral,1
+1877,neutral,1
+1878,neutral,1
+1882,neutral,1
+1885,neutral,1
+1890,neutral,1
+1892,neutral,1
+1894,neutral,0.461
+1898,hate speech,1
+1901,neutral,1
+1910,offensive language,1
+1914,neutral,1
+1917,hate speech,1
+1918,neutral,1
+1919,hate speech,1
+1921,hate speech,1
+1923,neutral,0.707
+1947,neutral,1
+1953,neutral,1
+1957,neutral,1
+1959,neutral,1
+1961,neutral,1
+1966,neutral,1
+1973,neutral,1
+1977,neutral,1
+1980,neutral,1
+1983,neutral,1
+1985,neutral,1
+1987,neutral,1
+1989,neutral,1
+1993,neutral,1
+2004,neutral,1
+2012,neutral,1
+2019,neutral,1
+2020,neutral,1
+2026,neutral,0.781
+2028,neutral,1
+2036,neutral,1
+2037,neutral,1
+2038,neutral,1
+2044,neutral,1
+2052,neutral,1
+2060,neutral,1
+2069,neutral,1
+2077,neutral,1
+2085,neutral,1
+2097,neutral,1
+2101,neutral,1
+2103,neutral,1
+2109,neutral,1
+2110,neutral,1
+2111,neutral,1
+2115,neutral,1
+2120,neutral,1
+2122,neutral,1
+2130,neutral,1
+2135,neutral,1
+2136,neutral,1
+2139,neutral,1
+2146,neutral,1
+2147,neutral,1
+2149,neutral,1
+2150,neutral,1
+2151,neutral,1
+2153,neutral,1
+2159,neutral,1
+2163,neutral,1
+2169,neutral,1
+2173,neutral,1
+2174,neutral,1
+2175,neutral,1
+2179,neutral,1
+2180,neutral,1
+2184,neutral,1
+2187,offensive language,1
+2188,neutral,1
+2196,neutral,1
+2200,neutral,1
+2201,neutral,1
+2204,neutral,1
+2208,neutral,1
+2211,neutral,1
+2219,neutral,1
+2227,neutral,1
+2229,neutral,1
+2240,neutral,1
+2244,neutral,1
+2246,offensive language,1
+2248,neutral,1
+2250,neutral,1
+2254,neutral,1
+2256,offensive language,0.27
+2258,neutral,1
+2265,neutral,1
+2268,neutral,1
+2275,neutral,1
+2277,neutral,1
+2283,neutral,1
+2284,neutral,1
+2292,neutral,1
+2294,neutral,1
+2305,neutral,1
+2306,neutral,1
+2309,neutral,1
+2318,neutral,1
+2320,neutral,1
+2326,neutral,1
+2329,neutral,1
+2335,neutral,1
+2345,neutral,1
+2346,neutral,1
+2350,neutral,1
+2353,neutral,1
+2356,neutral,1
+2358,neutral,1
+2361,neutral,1
+2363,offensive language,0.909
+2365,neutral,1
+2366,neutral,0.647
+2369,neutral,1
+2373,hate speech,1
+2375,neutral,1
+2378,neutral,1
+2379,neutral,0.406
+2383,hate speech,1
+2385,neutral,1
+2388,offensive language,1
+2390,neutral,1
+2399,neutral,0.526
+2403,neutral,1
+2404,hate speech,1
+2415,neutral,0.933
+2416,hate speech,1
+2417,hate speech,1
+2422,offensive language,1
+2430,hate speech,1
+2431,offensive language,1
+2434,hate speech,1
+2436,neutral,0.635
+2438,neutral,1
+2441,hate speech,1
+2453,hate speech,1
+2454,neutral,0.961
+2459,neutral,1
+2471,neutral,1
+2472,neutral,1
+2473,neutral,1
+2478,neutral,1
+2486,neutral,1
+2509,neutral,1
+2513,neutral,1
+2515,neutral,1
+2516,neutral,1
+2518,neutral,1
+2521,neutral,1
+2523,neutral,1
+2524,neutral,1
+2530,neutral,1
+2538,neutral,1
+2539,offensive language,1
+2545,neutral,1
+2546,neutral,1
+2555,neutral,1
+2556,hate speech,1
+2558,neutral,1
+2561,neutral,0.877
+2568,neutral,1
+2569,hate speech,1
+2570,neutral,1
+2578,offensive language,0.868
+2584,neutral,1
+2589,offensive language,1
+2593,offensive language,1
+2594,neutral,0.997
+2597,neutral,1
+2604,neutral,1
+2616,neutral,1
+2618,neutral,1
+2619,neutral,1
+2626,offensive language,1
+2635,neutral,1
+2636,offensive language,0.939
+2637,neutral,1
+2643,neutral,1
+2651,neutral,1
+2652,neutral,1
+2655,neutral,1
+2664,neutral,1
+2667,neutral,1
+2670,neutral,1
+2678,hate speech,1
+2683,hate speech,0.864
+2685,neutral,1
+2692,hate speech,1
+2696,hate speech,1
+2709,hate speech,1
+2713,hate speech,0.973
+2719,hate speech,1
+2723,hate speech,1
+2732,neutral,1
+2733,neutral,1
+2738,neutral,1
+2746,neutral,1
+2747,neutral,0.576
+2748,neutral,1
+2751,neutral,1
+2756,neutral,1
+2757,neutral,1
+2758,neutral,1
+2765,neutral,1
+2780,neutral,1
+2781,neutral,1
+2793,neutral,1
+2798,neutral,1
+2805,offensive language,1
+2810,neutral,1
+2817,offensive language,0.903
+2824,offensive language,1
+2828,offensive language,1
+2829,offensive language,0.802
+2841,offensive language,0.861
+2842,neutral,0.765
+2846,offensive language,1
+2848,offensive language,0.424
+2859,offensive language,0.599
+2862,neutral,1
+2864,neutral,1
+2874,neutral,1
+2875,neutral,1
+2881,neutral,1
+2887,neutral,1
+2891,neutral,1
+2892,neutral,1
+2901,neutral,1
+2904,neutral,1
+2905,offensive language,0.905
+2907,neutral,0.731
+2909,neutral,1
+2911,neutral,1
+2914,neutral,1
+2917,neutral,1
+2920,neutral,1
+2923,neutral,1
+2925,neutral,1
+2926,neutral,1
+2927,neutral,1
+2930,neutral,1
+2934,neutral,1
+2941,neutral,1
+2942,neutral,1
+2944,neutral,1
+2946,neutral,1
+2947,neutral,1
+2952,neutral,1
+2959,neutral,1
+2963,neutral,1
+2970,neutral,1
+2977,neutral,1
+2981,neutral,1
+3000,neutral,1
+3004,neutral,1
+3014,hate speech,0.796
+3015,neutral,1
+3016,neutral,1
+3017,neutral,1
+3021,neutral,1
+3027,neutral,1
+3029,neutral,1
+3032,neutral,1
+3041,neutral,1
+3042,neutral,1
+3047,neutral,1
+3048,neutral,1
+3049,neutral,1
+3064,neutral,1
+3067,offensive language,0.894
+3076,neutral,1
+3078,neutral,1
+3082,neutral,1
+3086,neutral,1
+3095,neutral,0.67
+3096,offensive language,1
+3099,neutral,1
+3106,neutral,1
+3108,neutral,1
+3112,neutral,1
+3114,neutral,1
+3115,neutral,1
+3116,neutral,1
+3121,neutral,1
+3125,neutral,1
+3129,neutral,1
+3139,neutral,1
+3147,neutral,1
+3150,neutral,1
+3152,neutral,1
+3154,neutral,1
+3159,neutral,1
+3160,neutral,1
+3162,neutral,1
+3163,neutral,1
+3165,neutral,1
+3167,offensive language,1
+3168,neutral,1
+3169,neutral,1
+3174,offensive language,1
+3175,neutral,1
+3176,neutral,1
+3181,offensive language,1
+3201,offensive language,1
+3203,offensive language,0.916
+3207,neutral,0.288
+3208,offensive language,0.983
+3211,offensive language,0.951
+3213,offensive language,1
+3226,offensive language,1
+3230,offensive language,1
+3244,offensive language,0.332
+3257,neutral,1
+3260,neutral,1
+3271,neutral,1
+3287,neutral,1
+3289,neutral,1
+3290,neutral,1
+3291,neutral,1
+3292,neutral,1
+3293,neutral,1
+3296,neutral,1
+3300,neutral,1
+3303,neutral,1
+3312,neutral,0.498
+3316,neutral,1
+3322,neutral,1
+3327,neutral,1
+3343,neutral,1
+3345,neutral,1
+3351,neutral,1
+3358,neutral,1
+3371,neutral,1
+3374,neutral,1
+3385,neutral,1
+3402,hate speech,1
+3403,offensive language,0.952
+3409,hate speech,1
+3414,hate speech,1
+3419,hate speech,1
+3426,hate speech,1
+3428,hate speech,1
+3429,hate speech,1
+3430,offensive language,1
+3438,hate speech,1
+3440,hate speech,1
+3443,hate speech,1
+3446,neutral,1
+3449,neutral,1
+3456,neutral,1
+3460,neutral,1
+3462,neutral,1
+3470,neutral,1
+3487,neutral,1
+3490,neutral,1
+3497,neutral,1
+3498,neutral,1
+3506,offensive language,0.643
+3510,neutral,1
+3512,neutral,1
+3515,neutral,1
+3517,neutral,1
+3518,neutral,1
+3520,neutral,1
+3521,neutral,1
+3524,neutral,1
+3525,neutral,1
+3527,neutral,1
+3531,neutral,1
+3537,neutral,1
+3542,neutral,1
+3553,offensive language,0.573
+3560,offensive language,1
+3566,offensive language,1
+3567,neutral,1
+3572,offensive language,1
+3579,neutral,1
+3583,offensive language,1
+3584,offensive language,1
+3593,offensive language,1
+3597,neutral,1
+3598,neutral,1
+3603,hate speech,1
+3607,neutral,1
+3612,neutral,1
+3619,neutral,1
+3627,neutral,1
+3657,hate speech,1
+3661,hate speech,0.841
+3665,offensive language,1
+3668,offensive language,1
+3670,offensive language,1
+3672,offensive language,0.494
+3676,offensive language,0.785
+3679,offensive language,1
+3680,offensive language,1
+3684,offensive language,1
+3685,neutral,1
+3694,neutral,1
+3701,neutral,1
+3705,offensive language,0.643
+3711,neutral,1
+3712,neutral,1
+3715,neutral,1
+3718,neutral,1
+3721,neutral,1
+3727,neutral,1
+3733,neutral,1
+3738,offensive language,1
+3741,offensive language,1
+3746,hate speech,1
+3757,hate speech,1
+3759,hate speech,0.642
+3761,hate speech,1
+3762,offensive language,1
+3767,neutral,0.581
+3769,hate speech,1
+3770,hate speech,0.991
+3778,offensive language,1
+3787,neutral,0.85
+3792,neutral,1
+3799,neutral,1
+3802,neutral,1
+3804,neutral,1
+3826,neutral,1
+3829,neutral,1
+3832,neutral,1
+3835,neutral,1
+3841,neutral,1
+3850,neutral,1
+3854,hate speech,0.721
+3863,neutral,1
+3864,neutral,1
+3868,neutral,1
+3869,neutral,1
+3870,neutral,1
+3872,neutral,1
+3875,neutral,1
+3879,neutral,1
+3880,neutral,1
+3881,neutral,1
+3886,neutral,1
+3891,neutral,1
+3893,neutral,0.688
+3896,offensive language,0.957
+3907,offensive language,1
+3914,offensive language,0.879
+3920,offensive language,1
+3932,offensive language,1
+3934,offensive language,0.996
+3936,offensive language,1
+3938,offensive language,1
+3939,offensive language,1
+3941,offensive language,1
+3949,offensive language,1
+3950,offensive language,0.988
+3952,offensive language,0.987
+3964,hate speech,1
+3966,hate speech,0.709
+3967,offensive language,1
+3969,hate speech,1
+3970,hate speech,0.799
+3976,offensive language,0.88
+3990,offensive language,0.637
+3996,hate speech,1
+3998,hate speech,1
+4006,offensive language,1
+4015,hate speech,1
+4025,hate speech,1
+4028,offensive language,1
+4030,neutral,1
+4031,neutral,1
+4034,neutral,1
+4035,neutral,1
+4051,neutral,1
+4054,neutral,0.918
+4060,neutral,1
+4066,neutral,1
+4070,neutral,1
+4071,neutral,1
+4073,neutral,1
+4074,neutral,1
+4080,offensive language,1
+4083,hate speech,0.91
+4093,hate speech,1
+4094,neutral,0.877
+4096,hate speech,1
+4097,hate speech,0.955
+4102,offensive language,1
+4105,offensive language,1
+4124,offensive language,1
+4135,offensive language,0.525
+4141,offensive language,0.985
+4144,neutral,0.409
+4147,offensive language,1
+4148,offensive language,0.719
+4156,offensive language,1
+4158,offensive language,1
+4160,neutral,0.617
+4164,hate speech,1
+4172,offensive language,1
+4175,offensive language,1
+4177,neutral,0.973
+4181,hate speech,1
+4183,hate speech,0.618
+4186,hate speech,1
+4187,offensive language,1
+4200,offensive language,1
+4201,neutral,0.977
+4205,offensive language,1
+4206,hate speech,1
+4209,hate speech,0.975
+4220,offensive language,1
+4224,hate speech,1
+4230,offensive language,1
+4237,hate speech,1
+4240,hate speech,1
+4241,hate speech,1
+4245,offensive language,1
+4246,hate speech,0.942
+4250,offensive language,0.907
+4251,hate speech,1
+4256,hate speech,1
+4258,offensive language,0.997
+4259,hate speech,1
+4262,offensive language,1
+4263,offensive language,1
+4275,hate speech,1
+4278,hate speech,0.889
+4280,hate speech,1
+4287,hate speech,1
+4300,hate speech,1
+4304,hate speech,0.962
+4305,hate speech,1
+4311,hate speech,1
+4316,offensive language,1
+4319,hate speech,1
+4326,offensive language,0.996
+4334,hate speech,0.418
+4335,hate speech,1
+4340,hate speech,1
+4343,hate speech,0.96
+4344,hate speech,1
+4349,hate speech,1
+4350,offensive language,0.835
+4354,hate speech,1
+4358,offensive language,1
+4367,hate speech,0.957
+4374,hate speech,1
+4375,offensive language,1
+4376,offensive language,1
+4381,hate speech,1
+4382,hate speech,1
+4385,hate speech,0.963
+4388,offensive language,1
+4390,hate speech,1
+4391,offensive language,1
+4393,offensive language,1
+4394,hate speech,1
+4395,hate speech,1
+4397,offensive language,1
+4400,hate speech,1
+4404,hate speech,1
+4414,offensive language,1
+4420,hate speech,1
+4421,offensive language,0.78
+4425,hate speech,0.967
+4429,offensive language,0.652
+4434,offensive language,0.91
+4442,hate speech,1
+4443,offensive language,0.745
+4449,offensive language,0.422
+4451,offensive language,1
+4455,offensive language,0.876
+4458,offensive language,0.778
+4461,hate speech,1
+4467,offensive language,0.589
+4468,offensive language,1
+4469,offensive language,1
+4486,hate speech,0.735
+4487,hate speech,1
+4489,hate speech,1
+4493,offensive language,0.984
+4494,hate speech,1
+4499,hate speech,1
+4500,hate speech,1
+4509,hate speech,0.812
+4510,hate speech,1
+4514,hate speech,1
+4515,hate speech,1
+4519,hate speech,0.665
+4521,hate speech,1
+4523,offensive language,1
+4526,hate speech,1
+4529,hate speech,1
+4532,hate speech,0.843
+4541,hate speech,1
+4559,hate speech,1
+4565,hate speech,0.944
+4569,hate speech,1
+4570,hate speech,1
+4584,hate speech,1
+4586,hate speech,1
+4593,hate speech,1
+4597,offensive language,0.796
+4607,hate speech,0.875
+4616,hate speech,1
+4618,hate speech,1
+4619,hate speech,1
+4621,hate speech,1
+4623,hate speech,1
+4628,offensive language,1
+4637,hate speech,1
+4638,hate speech,0.901
+4647,hate speech,1
+4649,hate speech,1
+4650,hate speech,1
+4654,hate speech,1
+4655,hate speech,1
+4660,hate speech,0.647
+4669,hate speech,1
+4678,offensive language,1
+4682,hate speech,0.964
+4685,offensive language,0.633
+4687,hate speech,0.822
+4696,offensive language,0.918
+4715,offensive language,1
+4722,hate speech,1
+4730,hate speech,1
+4735,hate speech,1
+4738,hate speech,1
+4740,hate speech,1
+4742,hate speech,1
+4743,hate speech,1
+4744,hate speech,1
+4747,hate speech,1
+4748,offensive language,1
+4751,hate speech,1
+4754,hate speech,1
+4760,offensive language,1
+4768,offensive language,1
+4769,hate speech,1
+4771,hate speech,1
+4776,hate speech,1
+4782,hate speech,1
+4783,hate speech,1
+4786,offensive language,1
+4788,hate speech,1
+4789,hate speech,1
+4798,hate speech,1
+4804,hate speech,1
+4819,hate speech,1
+4820,hate speech,1
+4827,offensive language,1
+4828,offensive language,1
+4836,offensive language,1
+4840,hate speech,0.911
+4841,hate speech,0.985
+4844,hate speech,1
+4848,offensive language,1
+4855,offensive language,1
+4865,offensive language,1
+4869,offensive language,1
+4876,offensive language,0.817
+4877,hate speech,1
+4882,hate speech,1
+4883,hate speech,1
+4884,hate speech,1
+4885,hate speech,1
+4887,offensive language,0.958
+4894,offensive language,1
+4898,hate speech,1
+4900,hate speech,1
+4904,hate speech,1
+4906,hate speech,1
+4909,hate speech,0.872
+4912,hate speech,0.678
+4921,hate speech,1
+4923,hate speech,1
+4927,hate speech,0.948
+4933,hate speech,0.998
+4935,hate speech,1
+4938,hate speech,1
+4940,hate speech,1
+4949,hate speech,1
+4965,hate speech,1
+4968,hate speech,1
+4969,hate speech,1
+4971,hate speech,0.852
+4974,hate speech,0.893
+4978,hate speech,1
+4985,hate speech,1
+4987,hate speech,1
+4989,hate speech,1
+4990,hate speech,0.907
+4991,hate speech,1
+4992,hate speech,1
+4993,hate speech,1
+4996,hate speech,1
+4999,hate speech,1
+5005,hate speech,1
+5014,hate speech,1
+5016,hate speech,1
+5019,hate speech,1
+5026,offensive language,1
+5032,offensive language,1
+5033,offensive language,1
+5034,offensive language,0.669
+5037,offensive language,0.835
+5046,neutral,0.549
+5060,offensive language,0.994
+5062,offensive language,0.9
+5063,offensive language,0.888
+5065,offensive language,1
+5068,offensive language,1
+5072,neutral,1
+5078,offensive language,1
+5079,neutral,1
+5086,offensive language,1
+5092,offensive language,1
+5095,offensive language,0.84
+5096,neutral,1
+5100,offensive language,1
+5112,neutral,1
+5113,neutral,1
+5122,neutral,0.551
+5142,neutral,1
+5147,neutral,1
+5149,neutral,1
+5154,neutral,1
+5160,neutral,1
+5163,offensive language,0.927
+5164,neutral,1
+5168,neutral,1
+5175,neutral,0.82
+5197,neutral,1
+5199,neutral,0.282
+5207,neutral,1
+5210,neutral,1
+5211,neutral,1
+5214,neutral,1
+5216,neutral,1
+5237,hate speech,0.751
+5239,offensive language,0.959
+5263,offensive language,1
+5274,hate speech,1
+5277,hate speech,1
+5279,hate speech,1
+5289,hate speech,1
+5293,hate speech,1
+5294,hate speech,1
+5295,hate speech,1
+5298,hate speech,1
+5300,hate speech,1
+5302,hate speech,1
+5303,hate speech,1
+5306,hate speech,1
+5312,hate speech,1
+5317,hate speech,1
+5327,offensive language,1
+5330,hate speech,1
+5337,offensive language,1
+5338,hate speech,1
+5339,hate speech,1
+5350,offensive language,0.901
+5353,hate speech,0.587
+5356,hate speech,1
+5360,offensive language,1
+5361,offensive language,1
+5362,hate speech,1
+5365,offensive language,1
+5372,hate speech,1
+5373,hate speech,1
+5377,hate speech,1
+5385,neutral,1
+5390,hate speech,1
+5391,offensive language,1
+5395,hate speech,1
+5400,hate speech,1
+5403,offensive language,0.975
+5409,neutral,0.983
+5412,hate speech,1
+5420,offensive language,1
+5427,neutral,1
+5432,neutral,1
+5442,neutral,1
+5443,offensive language,1
+5453,neutral,1
+5455,neutral,1
+5456,neutral,1
+5459,neutral,1
+5470,neutral,1
+5476,neutral,1
+5478,neutral,1
+5479,neutral,1
+5485,neutral,1
+5486,neutral,1
+5495,neutral,1
+5496,neutral,1
+5509,neutral,1
+5514,neutral,1
+5524,neutral,1
+5527,neutral,1
+5532,neutral,1
+5538,neutral,1
+5553,offensive language,0.9
+5560,offensive language,0.701
+5561,hate speech,1
+5571,hate speech,1
+5575,hate speech,1
+5580,offensive language,1
+5582,offensive language,0.929
+5588,offensive language,0.775
+5593,hate speech,1
+5594,neutral,1
+5606,neutral,1
+5607,neutral,1
+5608,neutral,1
+5611,neutral,1
+5613,neutral,1
+5615,neutral,1
+5620,neutral,1
+5623,neutral,1
+5626,neutral,1
+5627,neutral,0.989
+5646,neutral,1
+5647,neutral,1
+5653,hate speech,1
+5654,hate speech,1
+5657,offensive language,1
+5659,offensive language,0.984
+5664,hate speech,1
+5668,offensive language,1
+5671,hate speech,1
+5678,hate speech,1
+5687,hate speech,1
+5692,offensive language,1
+5695,hate speech,1
+5710,offensive language,0.97
+5712,offensive language,0.969
+5717,neutral,1
+5720,offensive language,0.975
+5721,hate speech,1
+5727,offensive language,0.76
+5728,offensive language,0.865
+5729,neutral,1
+5737,neutral,1
+5740,neutral,1
+5742,neutral,1
+5748,neutral,1
+5751,neutral,1
+5753,offensive language,1
+5754,neutral,1
+5774,neutral,1
+5791,neutral,1
+5794,neutral,1
+5796,neutral,1
+5798,neutral,1
+5815,neutral,1
+5819,neutral,1
+5832,neutral,1
+5833,neutral,1
+5841,neutral,1
+5854,neutral,1
+5855,neutral,1
+5859,offensive language,0.814
+5861,neutral,1
+5866,neutral,1
+5875,offensive language,1
+5878,neutral,1
+5879,offensive language,0.792
+5881,neutral,1
+5885,neutral,1
+5887,neutral,1
+5893,neutral,1
+5900,neutral,0.954
+5903,neutral,1
+5905,neutral,1
+5906,neutral,1
+5913,neutral,1
+5914,neutral,1
+5915,neutral,1
+5918,neutral,1
+5921,neutral,1
+5925,neutral,1
+5934,neutral,1
+5947,neutral,1
+5955,neutral,1
+5960,neutral,1
+5967,neutral,1
+5971,neutral,1
+5975,neutral,1
+5982,neutral,1
+5999,neutral,1
+6001,neutral,1
+6002,neutral,1
+6003,neutral,1
+6014,offensive language,0.829
+6021,neutral,1
+6022,offensive language,0.781
+6030,neutral,1
+6040,neutral,1
+6043,neutral,1
+6044,offensive language,1
+6053,neutral,1
+6054,neutral,1
+6055,neutral,1
+6056,neutral,1
+6058,neutral,1
+6062,neutral,1
+6066,neutral,0.615
+6069,neutral,1
+6078,hate speech,1
+6084,offensive language,0.882
+6087,hate speech,1
+6095,hate speech,1
+6102,neutral,1
+6105,offensive language,0.751
+6107,hate speech,1
+6110,hate speech,0.933
+6115,offensive language,0.619
+6116,hate speech,0.993
+6118,hate speech,1
+6127,hate speech,1
+6131,hate speech,1
+6132,hate speech,1
+6142,hate speech,1
+6151,hate speech,1
+6153,offensive language,1
+6157,hate speech,0.837
+6167,hate speech,1
+6176,neutral,0.83
+6181,neutral,1
+6182,neutral,1
+6183,neutral,1
+6186,neutral,1
+6188,neutral,1
+6190,neutral,1
+6195,neutral,1
+6197,neutral,1
+6206,neutral,1
+6209,neutral,1
+6210,neutral,1
+6213,neutral,1
+6226,neutral,1
+6228,neutral,1
+6232,neutral,1
+6238,neutral,1
+6249,neutral,1
+6269,neutral,1
+6272,neutral,1
+6281,offensive language,0.776
+6285,neutral,1
+6286,neutral,1
+6294,neutral,1
+6301,neutral,1
+6302,neutral,1
+6303,neutral,1
+6305,neutral,1
+6307,neutral,1
+6309,neutral,1
+6316,neutral,1
+6317,neutral,1
+6320,neutral,1
+6326,neutral,0.873
+6329,neutral,1
+6342,neutral,1
+6345,neutral,0.974
+6352,neutral,1
+6358,offensive language,1
+6365,offensive language,1
+6368,offensive language,1
+6369,neutral,1
+6379,hate speech,1
+6382,hate speech,1
+6389,hate speech,1
+6395,hate speech,1
+6396,hate speech,1
+6400,hate speech,1
+6402,hate speech,1
+6410,hate speech,1
+6414,hate speech,0.739
+6418,offensive language,1
+6420,hate speech,1
+6421,hate speech,1
+6424,hate speech,1
+6440,neutral,1
+6444,offensive language,1
+6453,offensive language,1
+6464,neutral,1
+6466,neutral,1
+6471,neutral,0.788
+6473,neutral,0.874
+6474,neutral,1
+6475,hate speech,0.912
+6478,hate speech,1
+6480,offensive language,0.982
+6487,offensive language,1
+6488,hate speech,1
+6489,hate speech,1
+6492,hate speech,1
+6493,hate speech,1
+6501,hate speech,1
+6503,hate speech,1
+6511,hate speech,0.917
+6514,offensive language,0.552
+6524,offensive language,0.876
+6529,neutral,1
+6531,neutral,1
+6532,neutral,1
+6534,neutral,1
+6536,neutral,1
+6539,neutral,1
+6549,neutral,1
+6551,neutral,1
+6553,neutral,1
+6557,neutral,1
+6558,neutral,1
+6559,neutral,1
+6563,neutral,1
+6564,neutral,1
+6566,neutral,1
+6567,neutral,1
+6571,neutral,1
+6572,neutral,1
+6575,neutral,1
+6582,neutral,1
+6586,neutral,1
+6587,neutral,1
+6593,neutral,1
+6596,neutral,1
+6601,neutral,1
+6605,hate speech,0.282
+6611,neutral,1
+6614,neutral,1
+6620,neutral,1
+6622,offensive language,1
+6626,offensive language,1
+6631,hate speech,1
+6632,hate speech,1
+6633,hate speech,0.97
+6635,hate speech,1
+6660,offensive language,0.944
+6666,hate speech,0.774
+6681,hate speech,1
+6682,neutral,0.628
+6690,neutral,1
+6697,hate speech,1
+6698,neutral,1
+6705,hate speech,1
+6707,offensive language,0.541
+6715,hate speech,1
+6717,hate speech,1
+6719,neutral,1
+6720,hate speech,0.986
+6724,offensive language,0.98
+6725,neutral,0.907
+6727,neutral,0.305
+6734,offensive language,1
+6739,offensive language,1
+6752,offensive language,0.654
+6759,hate speech,1
+6762,hate speech,0.728
+6764,offensive language,1
+6765,hate speech,1
+6766,hate speech,0.867
+6767,neutral,0.754
+6769,offensive language,1
+6770,offensive language,1
+6772,offensive language,1
+6784,hate speech,1
+6792,hate speech,1
+6796,hate speech,1
+6809,offensive language,0.929
+6824,offensive language,1
+6833,offensive language,1
+6843,offensive language,1
+6844,hate speech,1
+6846,hate speech,1
+6847,hate speech,1
+6851,hate speech,1
+6854,neutral,1
+6857,offensive language,0.733
+6865,hate speech,0.732
+6879,hate speech,1
+6880,offensive language,1
+6899,hate speech,1
+6907,hate speech,1
+6911,hate speech,1
+6913,hate speech,1
+6922,hate speech,0.863
+6930,hate speech,0.814
+6931,hate speech,1
+6932,offensive language,1
+6933,offensive language,0.579
+6935,hate speech,0.476
+6943,hate speech,1
+6947,offensive language,0.985
+6951,hate speech,1
+6952,hate speech,1
+6953,hate speech,1
+6955,hate speech,1
+6957,hate speech,1
+6960,hate speech,1
+6971,neutral,1
+6979,neutral,1
+6981,neutral,1
+6988,neutral,1
+6989,neutral,0.899
+6995,neutral,1
+6996,neutral,1
+7005,neutral,1
+7014,neutral,1
+7016,neutral,1
+7017,neutral,1
+7019,neutral,1
+7028,offensive language,1
+7029,hate speech,1
+7034,hate speech,1
+7036,offensive language,0.404
+7038,hate speech,1
+7039,hate speech,1
+7045,hate speech,0.809
+7048,hate speech,1
+7052,neutral,1
+7061,hate speech,1
+7067,hate speech,1
+7070,offensive language,1
+7075,neutral,1
+7077,neutral,1
+7078,neutral,1
+7081,neutral,1
+7084,neutral,1
+7085,neutral,1
+7101,neutral,1
+7112,neutral,1
+7115,neutral,1
+7116,neutral,1
+7129,neutral,1
+7136,neutral,1
+7137,neutral,1
+7139,neutral,0.731
+7146,neutral,1
+7153,neutral,1
+7163,neutral,0.893
+7167,neutral,1
+7176,neutral,1
+7177,neutral,1
+7182,neutral,1
+7187,neutral,1
+7200,neutral,1
+7201,neutral,1
+7205,neutral,1
+7213,neutral,1
+7215,neutral,1
+7218,neutral,1
+7220,neutral,1
+7221,neutral,1
+7230,hate speech,0.852
+7233,neutral,1
+7238,neutral,1
+7244,neutral,1
+7246,hate speech,1
+7254,neutral,1
+7258,neutral,1
+7263,neutral,1
+7266,neutral,1
+7278,neutral,1
+7281,neutral,1
+7284,neutral,1
+7288,neutral,1
+7294,neutral,1
+7305,offensive language,0.768
+7307,offensive language,0.842
+7312,neutral,1
+7318,neutral,1
+7322,neutral,1
+7332,neutral,1
+7333,offensive language,1
+7334,neutral,1
+7341,neutral,1
+7344,neutral,1
+7354,offensive language,0.296
+7358,neutral,1
+7364,neutral,1
+7365,neutral,1
+7366,neutral,1
+7368,neutral,1
+7369,neutral,1
+7370,neutral,1
+7372,neutral,1
+7374,neutral,1
+7379,neutral,1
+7387,neutral,1
+7390,neutral,1
+7392,neutral,1
+7399,neutral,1
+7409,offensive language,0.761
+7411,neutral,1
+7412,offensive language,1
+7418,neutral,1
+7434,neutral,1
+7441,neutral,1
+7447,neutral,1
+7448,neutral,1
+7470,neutral,0.938
+7473,neutral,1
+7475,hate speech,0.907
+7485,neutral,1
+7488,offensive language,0.864
+7493,offensive language,1
+7497,neutral,0.58
+7500,hate speech,1
+7503,hate speech,1
+7504,hate speech,0.913
+7506,hate speech,1
+7509,hate speech,1
+7519,hate speech,1
+7523,hate speech,1
+7533,hate speech,1
+7538,hate speech,1
+7557,offensive language,1
+7564,neutral,1
+7571,neutral,1
+7573,neutral,1
+7575,hate speech,0.21
+7588,neutral,1
+7589,neutral,1
+7590,neutral,1
+7595,neutral,1
+7597,offensive language,0.973
+7598,hate speech,1
+7604,hate speech,1
+7607,hate speech,1
+7630,neutral,1
+7632,neutral,1
+7635,neutral,1
+7640,neutral,1
+7644,neutral,1
+7654,neutral,1
+7657,neutral,1
+7658,neutral,1
+7660,neutral,0.759
+7665,neutral,1
+7671,neutral,1
+7672,neutral,1
+7676,neutral,1
+7683,neutral,1
+7684,neutral,1
+7688,neutral,1
+7697,neutral,1
+7699,neutral,1
+7711,offensive language,1
+7712,neutral,1
+7714,neutral,1
+7718,offensive language,1
+7719,neutral,0.841
+7720,neutral,1
+7722,neutral,1
+7728,neutral,1
+7737,offensive language,1
+7738,neutral,1
+7740,neutral,1
+7741,offensive language,1
+7748,neutral,0.427
+7751,neutral,1
+7752,offensive language,1
+7753,neutral,1
+7766,hate speech,1
+7769,hate speech,1
+7770,hate speech,1
+7777,hate speech,1
+7783,hate speech,1
+7784,offensive language,0.984
+7805,hate speech,0.842
+7809,neutral,1
+7811,hate speech,0.903
+7812,hate speech,1
+7815,neutral,1
+7818,hate speech,1
+7825,hate speech,0.611
+7830,offensive language,1
+7839,offensive language,1
+7845,hate speech,1
+7850,offensive language,1
+7851,offensive language,1
+7856,offensive language,0.836
+7859,hate speech,1
+7864,hate speech,1
+7874,hate speech,1
+7877,hate speech,1
+7882,hate speech,0.995
+7894,hate speech,1
+7896,offensive language,1
+7909,neutral,1
+7914,neutral,1
+7920,neutral,1
+7922,neutral,1
+7925,neutral,1
+7928,neutral,1
+7932,offensive language,1
+7934,neutral,1
+7941,neutral,1
+7953,neutral,1
+7958,neutral,1
+7962,neutral,1
+7978,hate speech,1
+7980,hate speech,1
+7982,offensive language,0.518
+7989,hate speech,1
+7990,hate speech,1
+7991,hate speech,1
+7994,hate speech,1
+7997,hate speech,1
+7998,hate speech,1
+8004,hate speech,0.916
+8005,hate speech,1
+8007,hate speech,1
+8008,hate speech,1
+8014,hate speech,0.808
+8020,neutral,1
+8024,neutral,1
+8028,neutral,1
+8029,neutral,1
+8037,hate speech,0.905
+8039,neutral,1
+8045,neutral,1
+8049,neutral,1
+8050,neutral,1
+8052,neutral,1
+8056,hate speech,0.879
+8059,hate speech,1
+8067,offensive language,1
+8074,hate speech,0.83
+8082,hate speech,1
+8085,hate speech,1
+8086,hate speech,1
+8093,neutral,0.475
+8113,neutral,1
+8124,neutral,1
+8132,neutral,1
+8142,neutral,1
+8145,neutral,1
+8149,neutral,1
+8152,neutral,1
+8153,neutral,1
+8155,neutral,1
+8158,neutral,1
+8160,neutral,1
+8172,neutral,1
+8173,neutral,1
+8175,neutral,1
+8178,neutral,1
+8183,neutral,1
+8184,neutral,1
+8186,neutral,1
+8188,neutral,1
+8198,neutral,1
+8199,neutral,1
+8204,neutral,1
+8205,neutral,1
+8211,neutral,1
+8216,neutral,1
+8220,neutral,1
+8221,neutral,1
+8229,neutral,1
+8233,neutral,1
+8237,neutral,1
+8239,neutral,1
+8244,neutral,1
+8247,neutral,1
+8251,neutral,1
+8256,neutral,1
+8268,offensive language,1
+8271,neutral,1
+8272,offensive language,1
+8274,neutral,1
+8279,neutral,1
+8290,offensive language,1
+8302,neutral,1
+8303,neutral,0.958
+8313,hate speech,0.998
+8314,hate speech,1
+8319,hate speech,1
+8329,hate speech,1
+8332,offensive language,1
+8337,hate speech,1
+8341,offensive language,0.896
+8342,hate speech,1
+8343,hate speech,1
+8344,offensive language,1
+8347,hate speech,1
+8349,hate speech,1
+8351,hate speech,1
+8353,hate speech,0.929
+8362,hate speech,1
+8364,hate speech,1
+8367,offensive language,0.728
+8371,neutral,1
+8375,offensive language,1
+8378,hate speech,0.876
+8385,offensive language,1
+8394,offensive language,1
+8403,neutral,1
+8410,hate speech,1
+8428,hate speech,1
+8429,hate speech,1
+8431,offensive language,1
+8434,hate speech,1
+8442,hate speech,1
+8446,hate speech,1
+8447,hate speech,1
+8449,hate speech,1
+8461,offensive language,1
+8462,neutral,1
+8463,neutral,1
+8469,neutral,1
+8471,neutral,1
+8475,neutral,1
+8476,neutral,1
+8483,neutral,1
+8486,neutral,1
+8487,neutral,1
+8491,neutral,1
+8503,neutral,1
+8506,neutral,1
+8507,neutral,1
+8513,neutral,1
+8514,offensive language,1
+8515,neutral,1
+8518,neutral,1
+8531,neutral,1
+8541,neutral,1
+8547,neutral,1
+8563,neutral,1
+8566,neutral,1
+8567,neutral,1
+8593,neutral,1
+8605,neutral,1
+8619,neutral,1
+8620,neutral,1
+8621,neutral,1
+8622,neutral,1
+8637,hate speech,0.68
+8643,offensive language,0.96
+8652,hate speech,0.772
+8654,neutral,1
+8655,hate speech,1
+8660,offensive language,1
+8662,neutral,1
+8678,neutral,0.607
+8685,neutral,1
+8702,neutral,1
+8707,neutral,1
+8712,neutral,1
+8716,neutral,1
+8717,neutral,1
+8718,neutral,1
+8729,offensive language,1
+8738,offensive language,1
+8741,offensive language,1
+8757,hate speech,0.964
+8759,hate speech,1
+8767,offensive language,1
+8772,offensive language,1
+8780,neutral,1
+8788,neutral,1
+8790,neutral,1
+8803,offensive language,0.584
+8808,neutral,1
+8819,offensive language,1
+8838,neutral,1
+8857,neutral,1
+8863,neutral,1
+8865,neutral,1
+8868,neutral,1
+8871,neutral,1
+8875,neutral,1
+8877,hate speech,1
+8881,hate speech,1
+8882,hate speech,1
+8883,hate speech,1
+8884,neutral,0.416
+8892,hate speech,0.911
+8893,hate speech,1
+8894,offensive language,0.528
+8899,hate speech,1
+8901,hate speech,1
+8902,offensive language,0.747
+8914,hate speech,1
+8919,offensive language,1
+8920,neutral,0.995
+8929,offensive language,0.868
+8935,neutral,1
+8936,neutral,1
+8945,hate speech,0.801
+8954,neutral,1
+8960,neutral,1
+8965,hate speech,1
+8982,hate speech,1
+8984,hate speech,1
+8993,hate speech,1
+9002,hate speech,0.722
+9004,hate speech,1
+9005,hate speech,0.647
+9014,hate speech,1
+9024,neutral,1
+9026,neutral,1
+9030,neutral,1
+9033,neutral,1
+9034,neutral,1
+9036,neutral,1
+9039,neutral,1
+9041,neutral,1
+9042,neutral,1
+9056,neutral,1
+9060,neutral,1
+9079,neutral,1
+9085,neutral,1
+9092,neutral,1
+9097,neutral,1
+9099,neutral,1
+9101,neutral,1
+9107,neutral,1
+9115,neutral,1
+9120,neutral,1
+9121,neutral,1
+9122,neutral,1
+9130,offensive language,1
+9134,neutral,1
+9138,neutral,1
+9139,offensive language,0.623
+9141,offensive language,1
+9147,offensive language,1
+9152,offensive language,0.904
+9153,offensive language,0.71
+9159,offensive language,0.814
+9163,hate speech,0.935
+9169,offensive language,1
+9178,offensive language,1
+9181,neutral,0.869
+9184,offensive language,0.391
+9185,offensive language,1
+9191,neutral,1
+9192,neutral,1
+9195,offensive language,0.941
+9206,neutral,0.669
+9212,neutral,1
+9227,neutral,1
+9231,hate speech,1
+9232,hate speech,1
+9243,neutral,1
+9247,offensive language,0.518
+9248,hate speech,1
+9254,offensive language,1
+9256,offensive language,0.532
+9259,hate speech,0.678
+9262,neutral,1
+9267,neutral,1
+9274,neutral,1
+9279,neutral,1
+9284,neutral,1
+9286,neutral,0.963
+9288,neutral,1
+9299,neutral,1
+9302,offensive language,1
+9310,neutral,1
+9311,neutral,1
+9320,offensive language,1
+9322,offensive language,1
+9325,hate speech,0.857
+9329,offensive language,0.689
+9335,hate speech,0.811
+9343,offensive language,0.361
+9348,offensive language,1
+9350,hate speech,0.594
+9351,offensive language,0.451
+9353,hate speech,0.963
+9355,hate speech,1
+9356,hate speech,1
+9361,offensive language,1
+9366,offensive language,1
+9368,offensive language,0.998
+9370,offensive language,1
+9371,offensive language,0.882
+9373,offensive language,1
+9380,offensive language,0.95
+9393,hate speech,0.892
+9396,hate speech,0.644
+9402,offensive language,1
+9403,hate speech,1
+9404,offensive language,1
+9409,offensive language,0.955
+9410,offensive language,1
+9424,neutral,1
+9427,offensive language,1
+9432,offensive language,1
+9436,neutral,1
+9441,neutral,1
+9444,neutral,1
+9457,neutral,1
+9458,neutral,1
+9462,hate speech,1
+9463,hate speech,0.907
+9464,neutral,0.697
+9483,hate speech,1
+9492,hate speech,1
+9495,hate speech,1
+9496,hate speech,1
+9497,hate speech,1
+9499,hate speech,1
+9502,hate speech,1
+9504,offensive language,0.886
+9511,neutral,0.659
+9512,neutral,0.45
+9513,hate speech,1
+9515,hate speech,0.892
+9518,offensive language,0.835
+9520,hate speech,1
+9522,hate speech,1
+9523,hate speech,1
+9524,hate speech,1
+9531,offensive language,1
+9539,offensive language,1
+9546,offensive language,0.981
+9554,neutral,1
+9558,neutral,1
+9564,neutral,1
+9569,neutral,1
+9576,neutral,1
+9582,neutral,1
+9583,neutral,1
+9588,neutral,1
+9597,neutral,1
+9599,offensive language,1
+9602,neutral,1
+9613,neutral,1
+9626,neutral,1
+9630,neutral,1
+9637,offensive language,1
+9656,neutral,1
+9658,neutral,1
+9663,neutral,1
+9664,neutral,1
+9668,neutral,1
+9673,neutral,1
+9679,neutral,1
+9684,neutral,1
+9700,neutral,1
+9701,neutral,1
+9702,hate speech,1
+9703,neutral,0.635
+9715,neutral,1
+9718,neutral,1
+9720,neutral,1
+9726,neutral,1
+9730,neutral,1
+9736,offensive language,1
+9743,hate speech,1
+9744,hate speech,0.866
+9748,offensive language,1
+9761,hate speech,0.827
+9767,hate speech,1
+9771,hate speech,1
+9772,hate speech,1
+9773,offensive language,1
+9778,hate speech,1
+9783,hate speech,1
+9784,hate speech,0.932
+9796,hate speech,1
+9804,hate speech,1
+9812,hate speech,1
+9823,hate speech,0.738
+9829,offensive language,0.968
+9840,offensive language,1
+9848,offensive language,0.924
+9850,hate speech,0.964
+9851,offensive language,1
+9855,offensive language,0.872
+9859,offensive language,0.665
+9861,hate speech,1
+9864,offensive language,1
+9866,hate speech,0.981
+9870,hate speech,1
+9874,offensive language,1
+9875,offensive language,0.791
+9878,hate speech,1
+9880,offensive language,1
+9897,hate speech,1
+9900,hate speech,0.982
+9905,offensive language,1
+9910,hate speech,0.99
+9912,offensive language,1
+9917,hate speech,0.91
+9921,offensive language,1
+9924,hate speech,1
+9929,offensive language,1
+9939,neutral,0.524
+9943,hate speech,0.333
+9949,offensive language,0.525
+9952,offensive language,1
+9955,neutral,0.409
+9959,offensive language,0.719
+9961,neutral,0.873
+9964,offensive language,1
+9972,hate speech,1
+9975,offensive language,1
+9981,hate speech,0.69
+9987,hate speech,1
+9988,hate speech,1
+9995,offensive language,1
+9999,neutral,0.766
+10001,hate speech,1
+10005,hate speech,1
+10010,offensive language,1
+10014,hate speech,1
+10019,hate speech,1
+10032,offensive language,1
+10038,hate speech,0.957
+10045,hate speech,0.956
+10046,hate speech,1
+10048,hate speech,1
+10049,offensive language,1
+10053,offensive language,1
+10062,hate speech,1
+10063,offensive language,1
+10065,hate speech,1
+10066,offensive language,0.735
+10068,hate speech,1
+10069,offensive language,0.835
+10071,offensive language,1
+10072,hate speech,1
+10074,offensive language,1
+10077,offensive language,0.85
+10084,offensive language,0.625
+10087,hate speech,1
+10090,offensive language,1
+10092,hate speech,1
+10099,hate speech,1
+10109,offensive language,0.946
+10114,hate speech,1
+10129,hate speech,1
+10153,neutral,1
+10155,offensive language,0.272
+10157,offensive language,0.387
+10159,neutral,1
+10160,neutral,1
+10167,neutral,1
+10172,neutral,1
+10174,neutral,1
+10185,offensive language,1
+10190,neutral,1
+10191,hate speech,0.928
+10192,offensive language,1
+10193,neutral,0.645
+10208,offensive language,1
+10212,hate speech,0.971
+10217,neutral,1
+10219,neutral,1
+10220,neutral,1
+10222,neutral,1
+10230,neutral,1
+10231,neutral,1
+10234,neutral,1
+10237,neutral,1
+10254,offensive language,1
+10268,neutral,1
+10291,neutral,0.31
+10292,neutral,1
+10294,offensive language,1
+10312,hate speech,1
+10313,offensive language,1
+10314,offensive language,0.993
+10316,offensive language,1
+10319,hate speech,0.833
+10322,hate speech,1
+10323,offensive language,1
+10343,offensive language,0.9
+10345,offensive language,0.278
+10351,offensive language,1
+10357,offensive language,1
+10360,offensive language,0.746
+10371,offensive language,0.975
+10376,neutral,1
+10378,neutral,1
+10384,neutral,1
+10389,neutral,1
+10399,neutral,1
+10405,neutral,1
+10425,neutral,1
+10434,neutral,1
+10436,neutral,1
+10439,neutral,1
+10449,neutral,1
+10450,neutral,1
+10456,neutral,1
+10459,neutral,1
+10465,neutral,1
+10467,neutral,1
+10479,neutral,1
+10482,neutral,1
+10492,neutral,1
+10503,neutral,1
+10504,neutral,0.99
+10509,neutral,1
+10510,neutral,0.668
+10512,neutral,1
+10515,neutral,1
+10516,offensive language,1
+10517,neutral,1
+10527,offensive language,0.925
+10530,offensive language,1
+10537,neutral,1
+10541,neutral,1
+10542,neutral,1
+10544,neutral,1
+10552,neutral,1
+10556,neutral,1
+10560,neutral,1
+10563,neutral,1
+10567,neutral,1
+10570,neutral,1
+10575,neutral,1
+10576,neutral,1
+10578,neutral,1
+10583,neutral,1
+10589,neutral,1
+10590,neutral,1
+10595,neutral,1
+10599,neutral,1
+10606,neutral,1
+10607,neutral,1
+10619,neutral,1
+10621,neutral,1
+10622,neutral,0.89
+10628,neutral,1
+10635,neutral,1
+10638,neutral,1
+10639,neutral,1
+10641,neutral,1
+10642,neutral,1
+10643,neutral,1
+10644,neutral,1
+10645,neutral,1
+10647,neutral,1
+10649,neutral,1
+10651,neutral,1
+10652,neutral,0.845
+10653,neutral,1
+10654,neutral,1
+10669,offensive language,1
+10670,offensive language,1
+10682,offensive language,1
+10686,offensive language,1
+10687,hate speech,0.637
+10688,offensive language,1
+10697,hate speech,1
+10700,offensive language,1
+10712,offensive language,1
+10725,offensive language,1
+10726,offensive language,1
+10736,offensive language,1
+10740,offensive language,1
+10741,offensive language,1
+10746,offensive language,1
+10749,offensive language,1
+10751,offensive language,1
+10754,offensive language,1
+10757,offensive language,1
+10758,offensive language,1
+10759,offensive language,1
+10763,offensive language,1
+10764,offensive language,1
+10769,hate speech,1
+10773,neutral,0.592
+10774,hate speech,1
+10775,offensive language,1
+10779,hate speech,1
+10785,hate speech,1
+10788,hate speech,1
+10793,hate speech,0.944
+10794,offensive language,0.292
+10796,hate speech,1
+10806,offensive language,0.73
+10812,hate speech,0.553
+10813,hate speech,1
+10820,offensive language,1
+10830,offensive language,1
+10833,offensive language,1
+10845,offensive language,1
+10847,offensive language,1
+10849,offensive language,0.888
+10856,offensive language,1
+10859,offensive language,1
+10863,offensive language,1
+10874,offensive language,0.931
+10876,offensive language,1
+10881,offensive language,1
+10882,offensive language,1
+10885,offensive language,1
+10887,offensive language,0.725
+10895,offensive language,1
+10896,offensive language,1
+10900,offensive language,1
+10901,offensive language,1
+10904,offensive language,1
+10907,offensive language,1
+10909,offensive language,1
+10912,offensive language,0.796
+10919,offensive language,1
+10924,hate speech,0.751
+10928,offensive language,1
+10944,offensive language,1
+10947,hate speech,0.315
+10949,neutral,0.937
+10950,offensive language,1
+10951,hate speech,0.906
+10957,offensive language,1
+10960,offensive language,1
+10963,offensive language,0.914
+10964,offensive language,1
+10966,offensive language,1
+10970,hate speech,1
+10974,hate speech,1
+10978,hate speech,1
+10985,hate speech,0.449
+10992,offensive language,1
+10994,offensive language,1
+10995,offensive language,1
+11003,offensive language,1
+11006,hate speech,1
+11007,hate speech,1
+11008,hate speech,1
+11009,hate speech,1
+11010,hate speech,1
+11012,hate speech,1
+11015,neutral,0.667
+11024,offensive language,0.968
+11025,neutral,1
+11026,neutral,0.698
+11049,neutral,1
+11051,neutral,1
+11057,neutral,1
+11065,neutral,0.704
+11070,neutral,1
+11071,neutral,1
+11073,neutral,1
+11074,neutral,1
+11075,neutral,1
+11084,neutral,1
+11087,neutral,1
+11093,neutral,1
+11099,neutral,1
+11112,neutral,1
+11116,neutral,1
+11123,offensive language,0.495
+11126,neutral,1
+11129,neutral,1
+11131,neutral,1
+11132,neutral,1
+11143,neutral,1
+11146,neutral,1
+11152,neutral,1
+11153,neutral,1
+11154,neutral,1
+11156,neutral,1
+11158,offensive language,0.946
+11162,neutral,1
+11163,neutral,1
+11165,neutral,1
+11166,neutral,1
+11168,neutral,1
+11179,offensive language,1
+11190,offensive language,1
+11193,offensive language,1
+11197,offensive language,1
+11199,offensive language,1
+11200,offensive language,1
+11201,offensive language,1
+11209,offensive language,1
+11216,offensive language,1
+11219,hate speech,1
+11221,hate speech,1
+11239,hate speech,1
+11242,hate speech,1
+11243,hate speech,1
+11247,hate speech,1
+11251,hate speech,1
+11255,offensive language,0.552
+11257,hate speech,1
+11258,hate speech,1
+11263,hate speech,1
+11270,offensive language,1
+11271,hate speech,0.995
+11278,offensive language,1
+11281,hate speech,1
+11288,offensive language,1
+11290,offensive language,1
+11295,hate speech,1
+11303,offensive language,0.933
+11304,hate speech,0.966
+11307,hate speech,1
+11315,hate speech,1
+11319,hate speech,1
+11320,hate speech,1
+11338,hate speech,0.854
+11347,hate speech,1
+11349,hate speech,1
+11353,neutral,0.876
+11355,offensive language,1
+11358,hate speech,1
+11359,hate speech,1
+11362,hate speech,1
+11369,offensive language,1
+11374,offensive language,0.412
+11383,offensive language,0.747
+11384,offensive language,1
+11385,offensive language,1
+11386,offensive language,0.962
+11393,hate speech,0.875
+11404,offensive language,0.71
+11408,hate speech,0.64
+11411,offensive language,0.502
+11412,neutral,0.779
+11418,offensive language,0.887
+11419,offensive language,0.936
+11421,neutral,0.94
+11422,hate speech,1
+11423,hate speech,0.872
+11426,offensive language,0.782
+11436,offensive language,0.994
+11441,offensive language,0.915
+11444,offensive language,0.523
+11456,offensive language,1
+11457,neutral,1
+11472,hate speech,1
+11476,hate speech,1
+11480,hate speech,1
+11483,offensive language,0.702
+11484,offensive language,0.796
+11485,hate speech,1
+11487,hate speech,1
+11493,hate speech,1
+11494,hate speech,1
+11495,hate speech,1
+11498,hate speech,1
+11499,hate speech,1
+11520,neutral,1
+11523,neutral,1
+11524,neutral,1
+11525,neutral,1
+11530,neutral,1
+11531,neutral,1
+11538,neutral,1
+11540,neutral,0.929
+11549,neutral,1
+11551,neutral,1
+11554,neutral,1
+11555,neutral,1
+11558,neutral,1
+11566,neutral,1
+11574,neutral,1
+11575,neutral,1
+11587,neutral,1
+11593,neutral,1
+11594,neutral,1
+11603,neutral,1
+11608,neutral,1
+11612,neutral,1
+11616,neutral,1
+11635,neutral,1
+11639,neutral,1
+11641,neutral,1
+11648,neutral,1
+11658,neutral,1
+11659,neutral,1
+11661,neutral,1
+11662,neutral,1
+11664,neutral,1
+11671,neutral,1
+11677,neutral,1
+11684,neutral,1
+11685,offensive language,1
+11695,neutral,1
+11715,hate speech,0.896
+11718,offensive language,1
+11720,offensive language,1
+11725,offensive language,0.739
+11727,offensive language,1
+11729,offensive language,1
+11732,offensive language,1
+11750,offensive language,1
+11752,offensive language,0.527
+11757,offensive language,1
+11764,hate speech,0.941
+11766,offensive language,0.929
+11767,offensive language,1
+11784,hate speech,1
+11789,hate speech,1
+11794,hate speech,1
+11797,hate speech,1
+11799,hate speech,1
+11804,hate speech,0.629
+11805,hate speech,1
+11811,neutral,1
+11812,neutral,1
+11820,neutral,1
+11824,neutral,1
+11827,offensive language,1
+11836,neutral,1
+11840,neutral,1
+11848,neutral,1
+11851,neutral,1
+11857,neutral,1
+11860,offensive language,1
+11866,neutral,1
+11869,neutral,1
+11871,neutral,1
+11876,neutral,1
+11878,neutral,1
+11879,neutral,1
+11881,neutral,1
+11890,neutral,1
+11892,neutral,1
+11894,neutral,1
+11902,neutral,1
+11905,neutral,1
+11910,neutral,1
+11911,hate speech,1
+11916,hate speech,1
+11917,hate speech,1
+11924,hate speech,0.917
+11929,hate speech,1
+11930,hate speech,1
+11933,neutral,1
+11941,neutral,1
+11942,offensive language,0.971
+11948,neutral,1
+11951,neutral,1
+11963,neutral,1
+11972,neutral,1
+11975,neutral,1
+11976,neutral,1
+11978,offensive language,1
+11986,neutral,1
+11990,neutral,1
+11991,neutral,1
+11992,neutral,1
+11998,offensive language,1
+11999,offensive language,1
+12003,neutral,1
+12004,neutral,1
+12005,neutral,1
+12007,neutral,1
+12009,neutral,1
+12012,neutral,1
+12014,neutral,1
+12020,neutral,1
+12022,offensive language,0.432
+12028,neutral,1
+12033,neutral,1
+12036,neutral,1
+12047,offensive language,1
+12056,neutral,1
+12058,offensive language,0.793
+12069,neutral,1
+12084,hate speech,1
+12086,offensive language,1
+12089,offensive language,0.444
+12091,neutral,0.412
+12098,hate speech,1
+12099,hate speech,1
+12101,hate speech,1
+12124,offensive language,0.319
+12127,offensive language,1
+12128,offensive language,0.841
+12135,hate speech,1
+12140,hate speech,1
+12146,hate speech,1
+12147,hate speech,1
+12150,offensive language,0.552
+12155,hate speech,1
+12166,neutral,1
+12169,neutral,1
+12170,neutral,1
+12172,neutral,1
+12175,neutral,1
+12177,neutral,1
+12184,neutral,1
+12187,neutral,1
+12189,offensive language,0.96
+12190,neutral,1
+12192,neutral,1
+12194,neutral,1
+12198,neutral,1
+12204,neutral,1
+12217,hate speech,1
+12219,hate speech,1
+12221,neutral,1
+12225,offensive language,1
+12228,neutral,0.672
+12231,hate speech,1
+12243,hate speech,1
+12251,hate speech,1
+12254,hate speech,0.782
+12272,neutral,1
+12273,neutral,0.94
+12278,offensive language,1
+12287,neutral,1
+12288,neutral,1
+12290,neutral,1
+12298,neutral,1
+12305,offensive language,1
+12314,neutral,1
+12316,neutral,1
+12319,neutral,1
+12327,neutral,1
+12331,neutral,1
+12333,neutral,1
+12339,neutral,1
+12345,neutral,1
+12364,neutral,1
+12378,neutral,1
+12379,neutral,1
+12387,neutral,1
+12388,neutral,1
+12393,offensive language,1
+12395,neutral,1
+12402,neutral,1
+12407,neutral,1
+12411,neutral,1
+12412,neutral,1
+12421,neutral,1
+12431,neutral,1
+12433,neutral,1
+12436,neutral,1
+12442,neutral,1
+12455,neutral,1
+12467,offensive language,0.596
+12484,neutral,1
+12490,neutral,1
+12493,neutral,1
+12499,hate speech,1
+12503,hate speech,1
+12515,hate speech,1
+12516,hate speech,0.891
+12524,hate speech,0.647
+12527,hate speech,1
+12551,hate speech,1
+12553,hate speech,0.478
+12554,hate speech,0.97
+12555,hate speech,1
+12556,hate speech,1
+12563,offensive language,1
+12569,offensive language,1
+12574,hate speech,1
+12576,hate speech,1
+12582,hate speech,1
+12590,offensive language,1
+12596,hate speech,1
+12601,hate speech,1
+12606,hate speech,1
+12615,offensive language,1
+12620,hate speech,1
+12631,hate speech,1
+12634,hate speech,1
+12646,hate speech,1
+12652,offensive language,1
+12654,offensive language,1
+12660,hate speech,0.226
+12665,offensive language,0.181
+12668,offensive language,0.762
+12670,offensive language,1
+12674,neutral,0.477
+12677,hate speech,1
+12684,offensive language,0.751
+12685,offensive language,0.938
+12693,offensive language,1
+12700,offensive language,0.688
+12702,offensive language,1
+12703,offensive language,1
+12709,neutral,1
+12712,neutral,1
+12720,neutral,1
+12721,neutral,1
+12722,neutral,1
+12728,neutral,1
+12733,neutral,1
+12734,neutral,0.856
+12741,neutral,1
+12742,neutral,1
+12744,neutral,1
+12746,neutral,1
+12759,neutral,1
+12769,neutral,1
+12783,neutral,1
+12785,neutral,1
+12789,neutral,1
+12791,hate speech,1
+12794,offensive language,0.432
+12797,offensive language,1
+12798,offensive language,1
+12801,offensive language,1
+12802,hate speech,0.961
+12813,offensive language,0.564
+12814,hate speech,1
+12820,hate speech,1
+12828,hate speech,0.99
+12830,offensive language,0.969
+12831,hate speech,1
+12834,hate speech,1
+12842,offensive language,1
+12848,hate speech,0.642
+12849,offensive language,1
+12850,offensive language,0.604
+12851,hate speech,1
+12855,offensive language,1
+12861,offensive language,1
+12872,hate speech,0.986
+12875,hate speech,1
+12880,offensive language,1
+12885,offensive language,1
+12897,neutral,1
+12899,neutral,1
+12904,offensive language,1
+12914,neutral,1
+12915,hate speech,1
+12916,offensive language,1
+12917,neutral,1
+12918,hate speech,1
+12923,hate speech,0.82
+12928,hate speech,1
+12932,hate speech,1
+12943,offensive language,1
+12958,offensive language,1
+12964,offensive language,1
+12967,offensive language,1
+12968,offensive language,1
+12973,offensive language,1
+12985,offensive language,1
+12989,offensive language,1
+12993,neutral,1
+12995,neutral,1
+13006,neutral,1
+13010,neutral,1
+13011,neutral,1
+13015,neutral,1
+13016,hate speech,0.927
+13018,neutral,1
+13020,offensive language,1
+13022,neutral,1
+13026,neutral,1
+13027,neutral,1
+13028,neutral,1
+13030,neutral,1
+13032,neutral,1
+13038,neutral,1
+13039,neutral,0.615
+13052,offensive language,1
+13073,offensive language,1
+13074,offensive language,1
+13077,offensive language,0.924
+13088,hate speech,0.674
+13089,offensive language,1
+13091,offensive language,0.925
+13094,hate speech,1
+13098,neutral,1
+13112,neutral,1
+13118,offensive language,0.438
+13119,hate speech,0.597
+13121,offensive language,1
+13122,neutral,0.936
+13128,neutral,0.936
+13131,offensive language,1
+13138,offensive language,1
+13147,offensive language,1
+13150,offensive language,1
+13152,offensive language,1
+13160,offensive language,1
+13161,offensive language,1
+13166,offensive language,1
+13170,offensive language,1
+13187,offensive language,1
+13189,hate speech,1
+13195,hate speech,1
+13201,hate speech,0.763
+13203,hate speech,1
+13207,hate speech,1
+13213,hate speech,1
+13219,hate speech,1
+13228,hate speech,1
+13229,hate speech,1
+13230,hate speech,1
+13240,offensive language,1
+13242,offensive language,1
+13246,offensive language,1
+13248,hate speech,0.909
+13249,offensive language,0.86
+13251,offensive language,1
+13258,offensive language,1
+13260,offensive language,1
+13265,offensive language,1
+13273,offensive language,1
+13279,offensive language,1
+13280,offensive language,1
+13284,hate speech,0.575
+13288,hate speech,1
+13292,hate speech,1
+13295,neutral,1
+13304,offensive language,0.693
+13307,neutral,1
+13308,offensive language,1
+13309,neutral,1
+13314,neutral,0.516
+13321,offensive language,0.998
+13327,hate speech,0.431
+13334,offensive language,1
+13336,neutral,1
+13340,offensive language,1
+13344,offensive language,1
+13351,hate speech,0.986
+13369,hate speech,1
+13386,offensive language,1
+13390,offensive language,1
+13400,offensive language,0.811
+13411,offensive language,1
+13428,offensive language,1
+13440,offensive language,1
+13451,neutral,1
+13454,neutral,1
+13457,neutral,1
+13459,neutral,1
+13467,neutral,1
+13482,neutral,1
+13504,offensive language,1
+13509,neutral,1
+13511,neutral,1
+13524,offensive language,1
+13529,neutral,1
+13534,neutral,1
+13543,neutral,1
+13555,neutral,1
+13564,neutral,1
+13570,neutral,1
+13571,neutral,1
+13576,neutral,1
+13578,offensive language,0.835
+13588,offensive language,0.701
+13590,neutral,1
+13616,hate speech,1
+13618,hate speech,1
+13619,hate speech,1
+13628,neutral,1
+13629,neutral,1
+13631,neutral,1
+13634,neutral,1
+13639,neutral,1
+13643,neutral,1
+13647,neutral,1
+13649,neutral,1
+13651,neutral,1
+13655,neutral,1
+13663,neutral,1
+13669,neutral,1
+13670,neutral,1
+13673,offensive language,1
+13675,neutral,1
+13680,neutral,1
+13692,neutral,1
+13694,neutral,1
+13695,neutral,1
+13700,offensive language,1
+13704,neutral,1
+13707,neutral,1
+13709,neutral,1
+13711,neutral,0.558
+13712,neutral,1
+13713,neutral,1
+13714,neutral,1
+13716,neutral,1
+13726,hate speech,1
+13732,hate speech,1
+13735,hate speech,1
+13737,offensive language,0.552
+13742,hate speech,1
+13748,hate speech,1
+13769,offensive language,1
+13770,offensive language,0.997
+13771,offensive language,0.855
+13785,hate speech,1
+13790,hate speech,0.917
+13793,hate speech,1
+13798,offensive language,1
+13799,offensive language,1
+13802,offensive language,1
+13803,offensive language,0.968
+13807,offensive language,0.974
+13808,hate speech,1
+13812,offensive language,0.974
+13814,offensive language,1
+13820,offensive language,1
+13829,offensive language,1
+13831,offensive language,1
+13835,offensive language,0.974
+13837,neutral,0.877
+13840,offensive language,1
+13845,offensive language,1
+13850,offensive language,1
+13856,offensive language,1
+13860,offensive language,1
+13861,hate speech,0.918
+13863,hate speech,1
+13867,hate speech,1
+13870,offensive language,0.885
+13876,offensive language,1
+13877,offensive language,1
+13883,offensive language,1
+13888,offensive language,1
+13891,offensive language,1
+13892,offensive language,1
+13894,offensive language,1
+13908,hate speech,1
+13909,offensive language,0.93
+13911,hate speech,1
+13913,offensive language,1
+13915,hate speech,1
+13920,offensive language,0.924
+13935,hate speech,1
+13938,hate speech,1
+13941,hate speech,0.544
+13943,hate speech,1
+13946,neutral,1
+13950,neutral,1
+13952,neutral,1
+13955,offensive language,1
+13957,neutral,0.824
+13958,offensive language,1
+13963,neutral,1
+13968,neutral,1
+13979,offensive language,0.891
+13981,offensive language,1
+13986,neutral,1
+13987,neutral,1
+13988,neutral,1
+13993,neutral,1
+13996,offensive language,1
+13998,hate speech,1
+13999,hate speech,1
+14002,offensive language,1
+14005,neutral,1
+14008,hate speech,1
+14020,neutral,0.523
+14023,neutral,1
+14026,offensive language,0.658
+14032,hate speech,1
+14042,neutral,0.81
+14047,neutral,0.969
+14058,neutral,1
+14062,hate speech,1
+14065,hate speech,1
+14076,hate speech,0.911
+14078,hate speech,1
+14082,hate speech,0.962
+14083,offensive language,0.664
+14086,hate speech,1
+14094,neutral,1
+14100,neutral,1
+14106,neutral,1
+14107,neutral,1
+14112,neutral,1
+14113,offensive language,1
+14117,neutral,1
+14122,neutral,1
+14131,neutral,0.602
+14142,neutral,1
+14148,neutral,0.597
+14152,neutral,0.924
+14161,neutral,0.805
+14164,hate speech,1
+14166,hate speech,1
+14172,neutral,1
+14180,neutral,0.51
+14192,neutral,1
+14201,neutral,1
+14202,neutral,1
+14203,neutral,1
+14205,neutral,1
+14214,neutral,1
+14215,neutral,1
+14218,hate speech,0.664
+14220,neutral,1
+14222,neutral,1
+14223,neutral,1
+14226,neutral,1
+14230,offensive language,1
+14233,neutral,1
+14238,offensive language,1
+14240,hate speech,1
+14242,offensive language,0.484
+14243,neutral,0.718
+14247,neutral,1
+14250,hate speech,1
+14259,hate speech,1
+14262,neutral,0.523
+14265,neutral,1
+14275,neutral,1
+14278,hate speech,0.966
+14283,offensive language,1
+14288,offensive language,0.8
+14294,offensive language,0.872
+14297,offensive language,1
+14303,hate speech,1
+14307,offensive language,1
+14311,offensive language,1
+14314,offensive language,1
+14315,offensive language,1
+14323,offensive language,1
+14330,offensive language,1
+14331,offensive language,0.809
+14333,neutral,1
+14334,offensive language,1
+14339,offensive language,1
+14340,offensive language,1
+14346,offensive language,1
+14355,neutral,0.877
+14357,offensive language,1
+14364,hate speech,1
+14379,hate speech,1
+14380,neutral,0.859
+14381,neutral,1
+14392,neutral,1
+14403,hate speech,0.593
+14409,hate speech,1
+14413,neutral,1
+14422,neutral,1
+14436,neutral,1
+14438,neutral,1
+14441,neutral,1

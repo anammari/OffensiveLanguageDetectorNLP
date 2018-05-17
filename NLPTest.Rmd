@@ -1,0 +1,832 @@
+---
+title: "NLP Test"
+author: "Ahmad Ammari"
+date: "2 September 2016"
+output:
+  html_document:
+    theme: cerulean
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=NA}
+library(knitr)
+opts_chunk$set(out.width='800px', dpi=200)
+options( java.parameters = "-Xmx1024m" )
+Sys.setenv(JAVA_HOME='C:\\Program Files\\Java\\jdk1.7.0_79\\jre')
+library(rJava)
+library(RWeka)
+library(stringr)
+library(RCurl)
+library(tm)
+library(httr)
+require(plyr)
+require(ggplot2)
+require(scales)
+require(gridExtra)
+require(RColorBrewer)
+require(wordcloud)
+require(slam)
+library(XLConnect)
+
+#working dir
+setwd("C:\\Users\\Ahmad\\Downloads\\hellosoda\\NLPTest")
+
+#multiplot function
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  require(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+  
+  if (numPlots==1) {
+    print(plots[[1]])
+    
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+```
+
+##Data Science Task
+
+###Objective
+
+In this task, I have been asked to build a predictive model which classifies social signals 'tweets' to three categories:
+
+- hate speech
+- offensive/insulting language
+- neutral
+
+I have been provided with two datasets in two .xlsx files:
+
+- Labelled set: collection of tweet texts and 'ground truth' annotations, where each tweet has been annotated with one of the three categories.  
+- Unlabeled set: collection of tweet texts with unknown categories. 
+
+The objectives are:
+
+- Perform exploratory analysis on the provided data to identify features and techniques that would be relevant to building the predictive model, choose adequate performance metrics to compare the various classifiers, and draw expectations for the performance of the model on unseen data. 
+
+- Design and implement a predictive service over HTTP for the chosen model and compute predictions for the unlabelled test dataset.
+
+###Exploratory Data Analysis
+
+####Frequency and Proportion of the tweet categories in the labeled set 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=NA}
+#reading training data from .xlsx
+if (exists("dataset")){
+    rm(dataset)
+}
+dataset <- readWorksheetFromFile("Twitter-hate_speech-labeled_data.xlsx", sheet=1, header = TRUE)
+
+if (dim(dataset)[1] > 0)
+    {
+        dataset$tweet_text <- sapply(dataset$tweet_text,function(row) iconv(row, "latin1", "ASCII", sub=""))
+}
+
+dataset$Label <- as.factor(dataset$Label)
+label_dist <- sort(table(dataset$Label), decreasing = T)
+lbls <- names(label_dist)
+slices <- as.vector(label_dist)
+pct <- round(slices/sum(slices)*100)
+lbls <- paste0(lbls," ",slices,"(",pct,"%)") # add percents to labels
+pie(slices,labels = lbls, col=rainbow(length(lbls)),
+  main="Proportions of tweet categories")
+      
+```
+
+As the proportions of all the tweet categories in the labeled set are statistically significant:
+
+- There is no inclination to address the problem as an anomaly detection problem, but as a classification problem.
+
+- There is a potential of predicting the tweet category based on the tokenized N-gram features of the tweet text.  
+
+####N-gram Frequency Analysis
+
+In this section, we will develop three frequency N-gram feature models (Unigram, Bigram, and Trigram) and inspect the top-20 features of the tweets annotated by each of the label categories in every model.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=NA}
+
+#DF to store preprocessed tweets for later usage
+df_cleaned_tweets = data.frame(
+                             text = character(0),
+                             label = character(0),
+                             stringsAsFactors=F
+                             )
+```
+
+#####Unigram Model Features 
+
+The top-20 unigram features with their counts in the labeled tweets for each category are depicted in the bar charts below: 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=NA, fig.width=18, fig.height=8}
+
+plots=list()
+i <- 1
+punct <- '[]\\?#!"£$%&(){}+*/:;,._`|~\\[<=>\\^-]'
+#Looping over the label categories
+for (lbl in names(label_dist)) {
+  #various text cleansing / preprocessing using regex
+  cleaned_twitter_sample <- character(0)
+  twitter_sample <- dataset[dataset$Label == lbl, c("tweet_text")]
+  for (x in twitter_sample) {
+    x <- str_replace_all(x,"[^[:graph:]]", " ")
+    x <- gsub("(f|ht)tp(s?)://(.*)[.][a-zA-Z]+/([a-zA-Z0-9]*)?", " ", x)
+    x <- gsub('[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}'," ", x, perl=T)
+    x <- gsub(punct, " ", x, perl=T)
+    x <- gsub("@[a-zA-Z0-9]+"," ", x, perl=T)
+    x <- gsub("\\s+", " ", x)
+    x <- gsub("^ ", " ", x, perl=T)
+    x <- gsub(" $", " ", x, perl=T)
+    x_list <- strsplit(x, " ")
+    x_vec <- unlist(x_list)
+    x_vec <- x_vec[sapply(x_vec,nchar) > 1]
+    encodings <- Encoding(x_vec)
+    x_enc <- iconv(x_vec, "latin1", "ASCII", sub=NA)
+    x_enc_nn <- x_enc[!is.na(x_enc)]
+    sentence <- paste(x_enc_nn, sep="", collapse=" ")
+    cleaned_twitter_sample <- c(cleaned_twitter_sample, sentence)
+  }
+  
+  #rbind cleaned_twitter_sample with df_cleaned_tweets for later use
+  numTweets <- length(cleaned_twitter_sample)
+  df_cleaned_tweets <- rbind(df_cleaned_tweets, data.frame(
+                                                          text=cleaned_twitter_sample, 
+                                                          label=rep(lbl, numTweets),
+                                                          stringsAsFactors=FALSE
+                                                          )
+                             )
+  
+  #Transform preprocessed tweets to Corpus objects using tm. Lower case, Remove punctuation, numbers, and English stop words
+  corpus <- Corpus(VectorSource(cleaned_twitter_sample))
+  corpus <- tm_map(corpus, content_transformer(tolower))
+  corpus <- tm_map(corpus, removePunctuation)
+  corpus <- tm_map(corpus, removeNumbers)
+  removeEnc <- function(x) gsub("[^[:alnum:]///' ]", "", x)
+  corpus <- tm_map(corpus, removeEnc)
+  myStopwords <- c(stopwords("english"),"just", "can", "cant", "via", "RT", "amp", "rt", "did", "didnt", "do", "dont", "is", "isnt", "was", "wasnt")
+  corpus <- tm_map(corpus, removeWords, myStopwords)
+  corpus <- tm_map(corpus, stripWhitespace)
+  twitter_corpus_clean <- tm_map(corpus, PlainTextDocument)
+  
+  #Create N-gram TDM and frequency table
+  tokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 1, max = 1))
+  twitter_tdm <- TermDocumentMatrix(twitter_corpus_clean, control = list(tokenize = tokenizer))
+  twitter_tdm2 <- removeSparseTerms(twitter_tdm, 0.99999)
+  twitter_tdm3 <- rollup(twitter_tdm2, 2, na.rm=TRUE, FUN = sum)
+  m <- as.matrix(twitter_tdm3)
+  v <- sort(rowSums(m),decreasing=TRUE)
+  twitter_freq_df <- as.data.frame(v)
+  twitter_freq_df$token <- rownames(twitter_freq_df)
+  rownames(twitter_freq_df) <- NULL
+  
+  #top-20 tokens bar chart 
+  top_20_df <- twitter_freq_df[1:20,]
+  colnames(top_20_df) <- c("value", "token")
+  colourCount <- length(unique(top_20_df$token))
+  getPalette = colorRampPalette(brewer.pal(9, "Reds"))
+  top_20_df$token <- factor(top_20_df$token)
+  top_20_df$token  <- with(top_20_df, reorder(token, value))
+  ht_ord <- levels(with(top_20_df, reorder(token, value)))
+  increment <- round(as.integer((max(top_20_df$value)) - as.integer(min(top_20_df$value))) / 10, 0)
+  #png("barchart_unigrams.png", width=12,height=8, units='in', res=300)
+  p <- ggplot(data=top_20_df, aes(x=token, y=value, fill=token))
+  p <- p + scale_fill_manual(breaks=ht_ord,values = getPalette(colourCount))
+  p <- p +  geom_bar(stat="identity")
+  p <- p +  coord_flip() 
+  p <- p +  xlab("Unigram Token") + ylab("count")
+  p <- p + ggtitle(paste0("Top-20 Unigram Tokens\nin ",lbl," tweets"))
+  p <- p +  scale_y_continuous(breaks = seq(as.integer(min(top_20_df$value)), as.integer(max(top_20_df$value)), by = increment), 
+                               labels = comma)
+  p <- p + theme(text = element_text(size = 14),
+                 axis.text.y = element_text(size = 16),
+                 axis.text.y = element_text(size = 16))
+  p <- p + guides(fill=FALSE)
+  plots[[i]] <- p
+  i <- i + 1
+}
+multiplot(plotlist=plots,cols=3)
+```
+
+As noted, there is a good distinction between the unigram tokens in the *neutral* category from one side and those in the *offensive language* and *hate speech* categories on the other side. However, the distinction becomes less clearer between the two non neutral labels. To further investigate this, we will compare between the top weighted unigram features in each category through a word cloud inspection.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=NA, fig.width=16, fig.height=8}
+#separate text by label
+labelLevels = levels(factor(df_cleaned_tweets$label))
+
+# get the labels and percents
+labels <-  lapply(labelLevels, function(x) paste(x,format(round((length((df_cleaned_tweets[df_cleaned_tweets$label ==x,])$text)/length(df_cleaned_tweets$label)*100),2),nsmall=2),"%"))
+
+nemo = length(labelLevels)
+emo.docs = rep("", nemo)
+for (i in 1:nemo)
+{
+  tmp = df_cleaned_tweets[df_cleaned_tweets$label == labelLevels[i],]$text
+  emo.docs[i] = paste(tmp,collapse=" ")
+}
+
+# remove stopwords
+myStopwords <- c(stopwords("english"),"just", "can", "cant", "via", "RT", "amp", "rt", "did", "didnt", "do", "dont", "is", "isnt", "was", "wasnt")
+emo.docs = removeWords(emo.docs, myStopwords)
+
+# build the TDM
+corpus = Corpus(VectorSource(emo.docs))
+tdm = TermDocumentMatrix(corpus)
+
+# plot the comparison word cloud
+tdm <- as.matrix(tdm)
+colnames(tdm) = labels
+comparison.cloud(tdm, scale=c(7,2), max.words=100, random.order=FALSE, rot.per=0.2, 
+          use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"),title.size = 1.5)
+
+
+```
+
+#####Bigram Model Features
+
+As the unigram features did not provide a strong predictive discrepancy between the non neutral categories, we will observe the top-20 bigram features with their counts in the same tweets for each category to see if the discrepancy between the features in the *offensive language* and *hate speech* categories becomes clearer. For that, we will not filter out the punctuation, numbers, or  stop words in order to preserve the sequence of tokens in the tweet texts. 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=NA, fig.width=18, fig.height=8}
+plots=list()
+i <- 1
+#Looping over the label categories 
+for (lbl in names(label_dist)) {
+  #subset the preprocessed tweets in df_cleaned_tweets based on the label
+  cleaned_twitter_sample <- df_cleaned_tweets[df_cleaned_tweets$label == lbl,]$text
+  #Transform preprocessed tweets to Corpus objects using tm. Lower case
+  corpus <- Corpus(VectorSource(cleaned_twitter_sample))
+  corpus <- tm_map(corpus, content_transformer(tolower))
+  removeEnc <- function(x) gsub("[^[:alnum:]///' ]", "", x)
+  corpus <- tm_map(corpus, removeEnc)
+  corpus <- tm_map(corpus, stripWhitespace)
+  twitter_corpus_clean <- tm_map(corpus, PlainTextDocument)
+  
+  #Create N-gram TDM and frequency table
+  tokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 2, max = 2))
+  twitter_tdm <- TermDocumentMatrix(twitter_corpus_clean, control = list(tokenize = tokenizer))
+  twitter_tdm2 <- removeSparseTerms(twitter_tdm, 0.99999)
+  twitter_tdm3 <- rollup(twitter_tdm2, 2, na.rm=TRUE, FUN = sum)
+  m <- as.matrix(twitter_tdm3)
+  v <- sort(rowSums(m),decreasing=TRUE)
+  twitter_freq_df <- as.data.frame(v)
+  twitter_freq_df$token <- rownames(twitter_freq_df)
+  rownames(twitter_freq_df) <- NULL
+  
+  #top-20 tokens bar chart 
+  top_20_df <- twitter_freq_df[1:20,]
+  colnames(top_20_df) <- c("value", "token")
+  colourCount <- length(unique(top_20_df$token))
+  getPalette = colorRampPalette(brewer.pal(9, "Blues"))
+  top_20_df$token <- factor(top_20_df$token)
+  top_20_df$token  <- with(top_20_df, reorder(token, value))
+  ht_ord <- levels(with(top_20_df, reorder(token, value)))
+  increment <- round(as.integer((max(top_20_df$value)) - as.integer(min(top_20_df$value))) / 10, 0)
+  #png("barchart_unigrams.png", width=12,height=8, units='in', res=300)
+  p <- ggplot(data=top_20_df, aes(x=token, y=value, fill=token))
+  p <- p + scale_fill_manual(breaks=ht_ord,values = getPalette(colourCount))
+  p <- p +  geom_bar(stat="identity")
+  p <- p +  coord_flip() 
+  p <- p +  xlab("Bigram Token") + ylab("count")
+  p <- p + ggtitle(paste0("Top-20 Bigram Tokens\nin ",lbl," tweets"))
+  p <- p +  scale_y_continuous(breaks = seq(as.integer(min(top_20_df$value)), as.integer(max(top_20_df$value)), by = increment), 
+                               labels = comma)
+  p <- p + theme(text = element_text(size = 14),
+                 axis.text.y = element_text(size = 16),
+                 axis.text.y = element_text(size = 16))
+  p <- p + guides(fill=FALSE)
+  plots[[i]] <- p
+  i <- i + 1
+}
+multiplot(plotlist=plots,cols=3)
+```
+
+#####Trigram Model Features
+
+Similarly, we will observe the top-20 trigram features with their counts in the labeled tweets for each category, again with preserving the token sequence by keeping the numbers and stop words. 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=NA, fig.width=18, fig.height=8}
+plots=list()
+i <- 1
+#Looping over the label categories 
+for (lbl in names(label_dist)) {
+  #subset the preprocessed tweets in df_cleaned_tweets based on the label
+  cleaned_twitter_sample <- df_cleaned_tweets[df_cleaned_tweets$label == lbl,]$text
+  #Transform preprocessed tweets to Corpus objects using tm. Lower case
+  corpus <- Corpus(VectorSource(cleaned_twitter_sample))
+  corpus <- tm_map(corpus, content_transformer(tolower))
+  removeEnc <- function(x) gsub("[^[:alnum:]///' ]", "", x)
+  corpus <- tm_map(corpus, removeEnc)
+  corpus <- tm_map(corpus, stripWhitespace)
+  twitter_corpus_clean <- tm_map(corpus, PlainTextDocument)
+  
+  #Create N-gram TDM and frequency table
+  tokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 3, max = 3))
+  twitter_tdm <- TermDocumentMatrix(twitter_corpus_clean, control = list(tokenize = tokenizer))
+  twitter_tdm2 <- removeSparseTerms(twitter_tdm, 0.99999)
+  twitter_tdm3 <- rollup(twitter_tdm2, 2, na.rm=TRUE, FUN = sum)
+  m <- as.matrix(twitter_tdm3)
+  v <- sort(rowSums(m),decreasing=TRUE)
+  twitter_freq_df <- as.data.frame(v)
+  twitter_freq_df$token <- rownames(twitter_freq_df)
+  rownames(twitter_freq_df) <- NULL
+  
+  #top-20 tokens bar chart 
+  top_20_df <- twitter_freq_df[1:20,]
+  colnames(top_20_df) <- c("value", "token")
+  colourCount <- length(unique(top_20_df$token))
+  getPalette = colorRampPalette(brewer.pal(9, "Greens"))
+  top_20_df$token <- factor(top_20_df$token)
+  top_20_df$token  <- with(top_20_df, reorder(token, value))
+  ht_ord <- levels(with(top_20_df, reorder(token, value)))
+  increment <- round(as.integer((max(top_20_df$value)) - as.integer(min(top_20_df$value))) / 10, 0)
+  #png("barchart_unigrams.png", width=12,height=8, units='in', res=300)
+  p <- ggplot(data=top_20_df, aes(x=token, y=value, fill=token))
+  p <- p + scale_fill_manual(breaks=ht_ord,values = getPalette(colourCount))
+  p <- p +  geom_bar(stat="identity")
+  p <- p +  coord_flip() 
+  p <- p +  xlab("Bigram Token") + ylab("count")
+  p <- p + ggtitle(paste0("Top-20 Bigram Tokens\nin ",lbl," tweets"))
+  p <- p +  scale_y_continuous(breaks = seq(as.integer(min(top_20_df$value)), as.integer(max(top_20_df$value)), by = increment), 
+                               labels = comma)
+  p <- p + theme(text = element_text(size = 14),
+                 axis.text.y = element_text(size = 16),
+                 axis.text.y = element_text(size = 16))
+  p <- p + guides(fill=FALSE)
+  plots[[i]] <- p
+  i <- i + 1
+}
+multiplot(plotlist=plots,cols=3)
+```
+
+####Recommendations for modelling
+
+- Both unigram, bigram, and trigram tokens could be candidate features in modelling the predictive model as the frequency models  shown ealier suggest a promising discrepancy of the token weights across the different label categories.
+
+- As the proportions of the different label categories are all statistically significant, we will address the problem as a text classification problem.
+
+- As the case of the label categories are not equal in proportions, we will normalize weights to instruct the classifier not to give more prior probability to the label category that has the vast majority of the tweets (neutral). An alternative approach is to use [Downsampling / Upsampling](http://www.simafore.com/blog/handling-unbalanced-data-machine-learning-models) as this may improve the classification accuracy when the category proportions are unbalanced.
+
+- As the problem is being addressed as a classification, 75% of the labeled data will be used for training and 25% will be used for evaluation. The proposed evaluation metrics are confusion matrix, precision, recall and overall accuracy. The expectation on the model performance on unseen data depends on the computed confidence intervals for the predictions of each label category. 
+
+###Service Design 
+
+In this section, we list the classification algorithms used and the N-gram variations tried with each algorithm. In addition, we present the evaluation for all the tried models and describe the implemented classification service based on the chosen model.    
+
+####Algorithms Used
+
+The following two algorhtims that are well known to provide good performance in text classification:  
+
+- [Multinomial Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier): simple and fast algorithm that has very good performance in most cases. 
+
+- [Support Vector Machines](http://en.wikipedia.org/wiki/Support_vector_machine): more complex algorithm, slightly slower than Naive Bayes but delivers a higher accuracy in general. 
+
+####N-Gram Variations
+
+For each of the two classification algorithms selected above, we will train three models using the *unigram*, *bigram*, and *trigram* feature vectors, respectively, which will be generated using 75% of the labeled data. The remaining 25% of the data will be used for evaluation.  
+
+####Evaluation 
+
+As it is required to implement the classifier as a service, a [MonkeyLearn](http://www.monkeylearn.com/) free account has been used to model all the tried classifiers for evaluation and also for implementing the final selected classifier to compute the predictions on the unlabeled data. The R script in the file *EvaluateTriedModels.R* randomly splits the training data into 75% train and 25% test, then uses the test portion to evaluate each of the six trained models. It also includes information about the service specifications, such as the request headers and the service endpoint.
+
+*Notes*: The models have been trained in offline mode using the [MonkeyLearn Platform](https://app.monkeylearn.com/main/classifiers/cl_znZbrRDB/tab/tree-sandbox). The free MonkeyLearn account has usage limit of 3000 observations for the training data. 
+
+The following evlauation metrics have all been computed by classifying the same 25% random split of the labeled data. The confusion matrices computed on the 75% split of the training data, which have been used to build the models, can also be inspected as PNG images in the folder *triedModels* that was submitted with this report.   
+
+#####Multinomial Naive Bayes classifier using Unigrams as Feature Vectors
+
+```{r, echo=FALSE, message=F, warning=F, comment=NA}
+
+setwd("C:\\Users\\Ahmad\\Downloads\\hellosoda\\NLPTest")
+
+load("classificationsMNBuniGrams.Rda")
+true_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'neutral',])
+false_hate_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'hate speech',])
+false_offensive_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'offensive language',])
+
+true_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'offensive language',])
+false_neutral_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'neutral',])
+false_hate_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'hate speech',])
+
+true_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'hate speech',])
+false_neutral_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'neutral',])
+false_offensive_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'offensive language',])
+
+neutral_precision <- round(true_neutral / (true_neutral + false_neutral_offensive + false_neutral_hate) * 100.00, 2)
+neutral_recall <- round(true_neutral / (true_neutral + false_hate_neutral + false_offensive_neutral) * 100.00, 2)
+
+offensive_precision <- round(true_offensive / (true_offensive + false_offensive_neutral + false_offensive_hate) * 100.00, 2)
+offensive_recall <- round(true_offensive / (true_offensive + false_neutral_offensive + false_hate_offensive) * 100.00, 2)
+
+hate_precision <- round(true_hate / (true_hate + false_hate_neutral + false_hate_offensive) * 100.00, 2)
+hate_recall <- round(true_hate / (true_hate + false_neutral_hate + false_offensive_hate) * 100.00, 2)
+
+matrix_total <- true_neutral + false_hate_neutral + false_offensive_neutral + true_offensive + false_neutral_offensive + false_hate_offensive + true_hate + false_neutral_hate + false_offensive_hate
+
+accuracy <- prettyNum(round((true_neutral+true_offensive+true_hate)/matrix_total * 100.00, 2), big.mark=",",scientific=FALSE)
+
+
+neutral_f1 <- round(2*((neutral_precision*neutral_recall)/(neutral_precision+neutral_recall)) , 2)
+offensive_f1 <- round(2*((offensive_precision*offensive_recall)/(offensive_precision+offensive_recall)) , 2)
+hate_f1 <- round(2*((hate_precision*hate_recall)/(hate_precision+hate_recall)) , 2)
+
+sumtab <- matrix(c("Neutral Cases",paste0("TNeutral: ",prettyNum(true_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_neutral,big.mark=",",scientific=FALSE)),
+                   paste0(neutral_precision, " %"),paste0(neutral_recall, " %"),paste0(neutral_f1, " %"),"Offensive Cases",
+                   paste0("FNeutral: ",prettyNum(false_neutral_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("TOffensive: ",prettyNum(true_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_offensive,big.mark=",",scientific=FALSE)),
+                   paste0(offensive_precision, " %"),paste0(offensive_recall, " %"),paste0(offensive_f1, " %"),"Hate Cases",
+                   paste0("FNeut: ",prettyNum(false_neutral_hate,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_hate,big.mark=",",scientific=FALSE)),
+                   paste0("THate: ",prettyNum(true_hate,big.mark=",",scientific=FALSE)),
+                   paste0(hate_precision, " %"),paste0(hate_recall, " %"),paste0(hate_f1, " %"))
+                 ,ncol=7,byrow=TRUE)
+
+colnames(sumtab) <- c("Actual / Predicted","Predicted Neutral", "Predicted Offensive", "Predicted Hate", "Class Precision", "Class Recall","Class F1 Score")
+kable(sumtab, format = "markdown", caption = "Confusion Matrix")
+
+```
+
+*overall model accuracy: `r accuracy` %*
+
+#####Multinomial Naive Bayes classifier using Bigrams as Feature Vectors
+
+```{r, echo=FALSE, message=F, warning=F, comment=NA}
+
+setwd("C:\\Users\\Ahmad\\Downloads\\hellosoda\\NLPTest")
+
+rm(test)
+load("classificationsMNBbiGrams.Rda")
+true_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'neutral',])
+false_hate_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'hate speech',])
+false_offensive_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'offensive language',])
+
+true_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'offensive language',])
+false_neutral_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'neutral',])
+false_hate_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'hate speech',])
+
+true_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'hate speech',])
+false_neutral_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'neutral',])
+false_offensive_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'offensive language',])
+
+neutral_precision <- round(true_neutral / (true_neutral + false_neutral_offensive + false_neutral_hate) * 100.00, 2)
+neutral_recall <- round(true_neutral / (true_neutral + false_hate_neutral + false_offensive_neutral) * 100.00, 2)
+
+offensive_precision <- round(true_offensive / (true_offensive + false_offensive_neutral + false_offensive_hate) * 100.00, 2)
+offensive_recall <- round(true_offensive / (true_offensive + false_neutral_offensive + false_hate_offensive) * 100.00, 2)
+
+hate_precision <- round(true_hate / (true_hate + false_hate_neutral + false_hate_offensive) * 100.00, 2)
+hate_recall <- round(true_hate / (true_hate + false_neutral_hate + false_offensive_hate) * 100.00, 2)
+
+matrix_total <- true_neutral + false_hate_neutral + false_offensive_neutral + true_offensive + false_neutral_offensive + false_hate_offensive + true_hate + false_neutral_hate + false_offensive_hate
+
+accuracy <- prettyNum(round((true_neutral+true_offensive+true_hate)/matrix_total * 100.00, 2), big.mark=",",scientific=FALSE)
+
+
+neutral_f1 <- round(2*((neutral_precision*neutral_recall)/(neutral_precision+neutral_recall)) , 2)
+offensive_f1 <- round(2*((offensive_precision*offensive_recall)/(offensive_precision+offensive_recall)) , 2)
+hate_f1 <- round(2*((hate_precision*hate_recall)/(hate_precision+hate_recall)) , 2)
+
+sumtab <- matrix(c("Neutral Cases",paste0("TNeutral: ",prettyNum(true_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_neutral,big.mark=",",scientific=FALSE)),
+                   paste0(neutral_precision, " %"),paste0(neutral_recall, " %"),paste0(neutral_f1, " %"),"Offensive Cases",
+                   paste0("FNeutral: ",prettyNum(false_neutral_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("TOffensive: ",prettyNum(true_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_offensive,big.mark=",",scientific=FALSE)),
+                   paste0(offensive_precision, " %"),paste0(offensive_recall, " %"),paste0(offensive_f1, " %"),"Hate Cases",
+                   paste0("FNeut: ",prettyNum(false_neutral_hate,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_hate,big.mark=",",scientific=FALSE)),
+                   paste0("THate: ",prettyNum(true_hate,big.mark=",",scientific=FALSE)),
+                   paste0(hate_precision, " %"),paste0(hate_recall, " %"),paste0(hate_f1, " %"))
+                 ,ncol=7,byrow=TRUE)
+
+colnames(sumtab) <- c("Actual / Predicted","Predicted Neutral", "Predicted Offensive", "Predicted Hate", "Class Precision", "Class Recall","Class F1 Score")
+kable(sumtab, format = "markdown", caption = "Confusion Matrix")
+
+```
+
+*overall model accuracy: `r accuracy` %*
+
+#####Multinomial Naive Bayes classifier using Trigrams as Feature Vectors
+
+```{r, echo=FALSE, message=F, warning=F, comment=NA}
+
+setwd("C:\\Users\\Ahmad\\Downloads\\hellosoda\\NLPTest")
+
+rm(test)
+load("classificationsMNBtriGrams.Rda")
+true_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'neutral',])
+false_hate_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'hate speech',])
+false_offensive_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'offensive language',])
+
+true_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'offensive language',])
+false_neutral_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'neutral',])
+false_hate_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'hate speech',])
+
+true_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'hate speech',])
+false_neutral_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'neutral',])
+false_offensive_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'offensive language',])
+
+neutral_precision <- round(true_neutral / (true_neutral + false_neutral_offensive + false_neutral_hate) * 100.00, 2)
+neutral_recall <- round(true_neutral / (true_neutral + false_hate_neutral + false_offensive_neutral) * 100.00, 2)
+
+offensive_precision <- round(true_offensive / (true_offensive + false_offensive_neutral + false_offensive_hate) * 100.00, 2)
+offensive_recall <- round(true_offensive / (true_offensive + false_neutral_offensive + false_hate_offensive) * 100.00, 2)
+
+hate_precision <- round(true_hate / (true_hate + false_hate_neutral + false_hate_offensive) * 100.00, 2)
+hate_recall <- round(true_hate / (true_hate + false_neutral_hate + false_offensive_hate) * 100.00, 2)
+
+matrix_total <- true_neutral + false_hate_neutral + false_offensive_neutral + true_offensive + false_neutral_offensive + false_hate_offensive + true_hate + false_neutral_hate + false_offensive_hate
+
+accuracy <- prettyNum(round((true_neutral+true_offensive+true_hate)/matrix_total * 100.00, 2), big.mark=",",scientific=FALSE)
+
+
+neutral_f1 <- round(2*((neutral_precision*neutral_recall)/(neutral_precision+neutral_recall)) , 2)
+offensive_f1 <- round(2*((offensive_precision*offensive_recall)/(offensive_precision+offensive_recall)) , 2)
+hate_f1 <- round(2*((hate_precision*hate_recall)/(hate_precision+hate_recall)) , 2)
+
+sumtab <- matrix(c("Neutral Cases",paste0("TNeutral: ",prettyNum(true_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_neutral,big.mark=",",scientific=FALSE)),
+                   paste0(neutral_precision, " %"),paste0(neutral_recall, " %"),paste0(neutral_f1, " %"),"Offensive Cases",
+                   paste0("FNeutral: ",prettyNum(false_neutral_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("TOffensive: ",prettyNum(true_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_offensive,big.mark=",",scientific=FALSE)),
+                   paste0(offensive_precision, " %"),paste0(offensive_recall, " %"),paste0(offensive_f1, " %"),"Hate Cases",
+                   paste0("FNeut: ",prettyNum(false_neutral_hate,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_hate,big.mark=",",scientific=FALSE)),
+                   paste0("THate: ",prettyNum(true_hate,big.mark=",",scientific=FALSE)),
+                   paste0(hate_precision, " %"),paste0(hate_recall, " %"),paste0(hate_f1, " %"))
+                 ,ncol=7,byrow=TRUE)
+
+colnames(sumtab) <- c("Actual / Predicted","Predicted Neutral", "Predicted Offensive", "Predicted Hate", "Class Precision", "Class Recall","Class F1 Score")
+kable(sumtab, format = "markdown", caption = "Confusion Matrix")
+
+```
+
+*overall model accuracy: `r accuracy` %*
+
+#####Support Vector Machines classifier using Unigrams as Feature Vectors
+
+```{r, echo=FALSE, message=F, warning=F, comment=NA}
+
+setwd("C:\\Users\\Ahmad\\Downloads\\hellosoda\\NLPTest")
+
+rm(test)
+load("classificationsSVMuniGrams.Rda")
+true_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'neutral',])
+false_hate_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'hate speech',])
+false_offensive_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'offensive language',])
+
+true_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'offensive language',])
+false_neutral_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'neutral',])
+false_hate_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'hate speech',])
+
+true_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'hate speech',])
+false_neutral_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'neutral',])
+false_offensive_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'offensive language',])
+
+neutral_precision <- round(true_neutral / (true_neutral + false_neutral_offensive + false_neutral_hate) * 100.00, 2)
+neutral_recall <- round(true_neutral / (true_neutral + false_hate_neutral + false_offensive_neutral) * 100.00, 2)
+
+offensive_precision <- round(true_offensive / (true_offensive + false_offensive_neutral + false_offensive_hate) * 100.00, 2)
+offensive_recall <- round(true_offensive / (true_offensive + false_neutral_offensive + false_hate_offensive) * 100.00, 2)
+
+hate_precision <- round(true_hate / (true_hate + false_hate_neutral + false_hate_offensive) * 100.00, 2)
+hate_recall <- round(true_hate / (true_hate + false_neutral_hate + false_offensive_hate) * 100.00, 2)
+
+matrix_total <- true_neutral + false_hate_neutral + false_offensive_neutral + true_offensive + false_neutral_offensive + false_hate_offensive + true_hate + false_neutral_hate + false_offensive_hate
+
+accuracy <- prettyNum(round((true_neutral+true_offensive+true_hate)/matrix_total * 100.00, 2), big.mark=",",scientific=FALSE)
+
+
+neutral_f1 <- round(2*((neutral_precision*neutral_recall)/(neutral_precision+neutral_recall)) , 2)
+offensive_f1 <- round(2*((offensive_precision*offensive_recall)/(offensive_precision+offensive_recall)) , 2)
+hate_f1 <- round(2*((hate_precision*hate_recall)/(hate_precision+hate_recall)) , 2)
+
+sumtab <- matrix(c("Neutral Cases",paste0("TNeutral: ",prettyNum(true_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_neutral,big.mark=",",scientific=FALSE)),
+                   paste0(neutral_precision, " %"),paste0(neutral_recall, " %"),paste0(neutral_f1, " %"),"Offensive Cases",
+                   paste0("FNeutral: ",prettyNum(false_neutral_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("TOffensive: ",prettyNum(true_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_offensive,big.mark=",",scientific=FALSE)),
+                   paste0(offensive_precision, " %"),paste0(offensive_recall, " %"),paste0(offensive_f1, " %"),"Hate Cases",
+                   paste0("FNeut: ",prettyNum(false_neutral_hate,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_hate,big.mark=",",scientific=FALSE)),
+                   paste0("THate: ",prettyNum(true_hate,big.mark=",",scientific=FALSE)),
+                   paste0(hate_precision, " %"),paste0(hate_recall, " %"),paste0(hate_f1, " %"))
+                 ,ncol=7,byrow=TRUE)
+
+colnames(sumtab) <- c("Actual / Predicted","Predicted Neutral", "Predicted Offensive", "Predicted Hate", "Class Precision", "Class Recall","Class F1 Score")
+kable(sumtab, format = "markdown", caption = "Confusion Matrix")
+
+```
+
+*overall model accuracy: `r accuracy` %*
+
+#####Support Vector Machines classifier using Bigrams as Feature Vectors
+
+```{r, echo=FALSE, message=F, warning=F, comment=NA}
+
+setwd("C:\\Users\\Ahmad\\Downloads\\hellosoda\\NLPTest")
+
+rm(test)
+load("classificationsSVMbiGrams.Rda")
+true_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'neutral',])
+false_hate_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'hate speech',])
+false_offensive_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'offensive language',])
+
+true_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'offensive language',])
+false_neutral_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'neutral',])
+false_hate_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'hate speech',])
+
+true_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'hate speech',])
+false_neutral_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'neutral',])
+false_offensive_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'offensive language',])
+
+neutral_precision <- round(true_neutral / (true_neutral + false_neutral_offensive + false_neutral_hate) * 100.00, 2)
+neutral_recall <- round(true_neutral / (true_neutral + false_hate_neutral + false_offensive_neutral) * 100.00, 2)
+
+offensive_precision <- round(true_offensive / (true_offensive + false_offensive_neutral + false_offensive_hate) * 100.00, 2)
+offensive_recall <- round(true_offensive / (true_offensive + false_neutral_offensive + false_hate_offensive) * 100.00, 2)
+
+hate_precision <- round(true_hate / (true_hate + false_hate_neutral + false_hate_offensive) * 100.00, 2)
+hate_recall <- round(true_hate / (true_hate + false_neutral_hate + false_offensive_hate) * 100.00, 2)
+
+matrix_total <- true_neutral + false_hate_neutral + false_offensive_neutral + true_offensive + false_neutral_offensive + false_hate_offensive + true_hate + false_neutral_hate + false_offensive_hate
+
+accuracy <- prettyNum(round((true_neutral+true_offensive+true_hate)/matrix_total * 100.00, 2), big.mark=",",scientific=FALSE)
+
+
+neutral_f1 <- round(2*((neutral_precision*neutral_recall)/(neutral_precision+neutral_recall)) , 2)
+offensive_f1 <- round(2*((offensive_precision*offensive_recall)/(offensive_precision+offensive_recall)) , 2)
+hate_f1 <- round(2*((hate_precision*hate_recall)/(hate_precision+hate_recall)) , 2)
+
+sumtab <- matrix(c("Neutral Cases",paste0("TNeutral: ",prettyNum(true_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_neutral,big.mark=",",scientific=FALSE)),
+                   paste0(neutral_precision, " %"),paste0(neutral_recall, " %"),paste0(neutral_f1, " %"),"Offensive Cases",
+                   paste0("FNeutral: ",prettyNum(false_neutral_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("TOffensive: ",prettyNum(true_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_offensive,big.mark=",",scientific=FALSE)),
+                   paste0(offensive_precision, " %"),paste0(offensive_recall, " %"),paste0(offensive_f1, " %"),"Hate Cases",
+                   paste0("FNeut: ",prettyNum(false_neutral_hate,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_hate,big.mark=",",scientific=FALSE)),
+                   paste0("THate: ",prettyNum(true_hate,big.mark=",",scientific=FALSE)),
+                   paste0(hate_precision, " %"),paste0(hate_recall, " %"),paste0(hate_f1, " %"))
+                 ,ncol=7,byrow=TRUE)
+
+colnames(sumtab) <- c("Actual / Predicted","Predicted Neutral", "Predicted Offensive", "Predicted Hate", "Class Precision", "Class Recall","Class F1 Score")
+kable(sumtab, format = "markdown", caption = "Confusion Matrix")
+
+```
+
+*overall model accuracy: `r accuracy` %*
+
+#####Support Vector Machines classifier using Trigrams as Feature Vectors
+
+```{r, echo=FALSE, message=F, warning=F, comment=NA}
+
+setwd("C:\\Users\\Ahmad\\Downloads\\hellosoda\\NLPTest")
+
+rm(test)
+load("classificationsSVMtriGrams.Rda")
+true_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'neutral',])
+false_hate_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'hate speech',])
+false_offensive_neutral <- nrow(test[test$label == 'neutral' & test$predictedClass == 'offensive language',])
+
+true_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'offensive language',])
+false_neutral_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'neutral',])
+false_hate_offensive <- nrow(test[test$label == 'offensive language' & test$predictedClass == 'hate speech',])
+
+true_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'hate speech',])
+false_neutral_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'neutral',])
+false_offensive_hate <- nrow(test[test$label == 'hate speech' & test$predictedClass == 'offensive language',])
+
+neutral_precision <- round(true_neutral / (true_neutral + false_neutral_offensive + false_neutral_hate) * 100.00, 2)
+neutral_recall <- round(true_neutral / (true_neutral + false_hate_neutral + false_offensive_neutral) * 100.00, 2)
+
+offensive_precision <- round(true_offensive / (true_offensive + false_offensive_neutral + false_offensive_hate) * 100.00, 2)
+offensive_recall <- round(true_offensive / (true_offensive + false_neutral_offensive + false_hate_offensive) * 100.00, 2)
+
+hate_precision <- round(true_hate / (true_hate + false_hate_neutral + false_hate_offensive) * 100.00, 2)
+hate_recall <- round(true_hate / (true_hate + false_neutral_hate + false_offensive_hate) * 100.00, 2)
+
+matrix_total <- true_neutral + false_hate_neutral + false_offensive_neutral + true_offensive + false_neutral_offensive + false_hate_offensive + true_hate + false_neutral_hate + false_offensive_hate
+
+accuracy <- prettyNum(round((true_neutral+true_offensive+true_hate)/matrix_total * 100.00, 2), big.mark=",",scientific=FALSE)
+
+
+neutral_f1 <- round(2*((neutral_precision*neutral_recall)/(neutral_precision+neutral_recall)) , 2)
+offensive_f1 <- round(2*((offensive_precision*offensive_recall)/(offensive_precision+offensive_recall)) , 2)
+hate_f1 <- round(2*((hate_precision*hate_recall)/(hate_precision+hate_recall)) , 2)
+
+sumtab <- matrix(c("Neutral Cases",paste0("TNeutral: ",prettyNum(true_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_neutral,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_neutral,big.mark=",",scientific=FALSE)),
+                   paste0(neutral_precision, " %"),paste0(neutral_recall, " %"),paste0(neutral_f1, " %"),"Offensive Cases",
+                   paste0("FNeutral: ",prettyNum(false_neutral_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("TOffensive: ",prettyNum(true_offensive,big.mark=",",scientific=FALSE)),
+                   paste0("FHate: ",prettyNum(false_hate_offensive,big.mark=",",scientific=FALSE)),
+                   paste0(offensive_precision, " %"),paste0(offensive_recall, " %"),paste0(offensive_f1, " %"),"Hate Cases",
+                   paste0("FNeut: ",prettyNum(false_neutral_hate,big.mark=",",scientific=FALSE)),
+                   paste0("FOffensive: ",prettyNum(false_offensive_hate,big.mark=",",scientific=FALSE)),
+                   paste0("THate: ",prettyNum(true_hate,big.mark=",",scientific=FALSE)),
+                   paste0(hate_precision, " %"),paste0(hate_recall, " %"),paste0(hate_f1, " %"))
+                 ,ncol=7,byrow=TRUE)
+
+colnames(sumtab) <- c("Actual / Predicted","Predicted Neutral", "Predicted Offensive", "Predicted Hate", "Class Precision", "Class Recall","Class F1 Score")
+kable(sumtab, format = "markdown", caption = "Confusion Matrix")
+
+```
+
+*overall model accuracy: `r accuracy` %*
+
+####Model Selection and Service Implementation
+
+The selection of a model for implementation highly depends on the most importance evaluation metric(s) for our needs: 
+
+- SVM classifier using Unigrams and Bigrams as feature vectors gave us the *highest overall model accuracy* of 72.06 % and 68.9 % respectively. There is a potential therefore to obtain higher overall accuracy by modelling an SVM classifier using a mixture of top frequently occuring Unigrams and Bigrams. We should select the SVM-Unigram if the three label categories are equal in importance. 
+
+- SVM classifier using Trigrams as Feature Vectors gave us the *highest recall* on the *neutral category* with 91.59 %. We sould select this classifier if missing neutral tweets is highly costly. SVM using Unigrams as Feature Vectors give us the *highest precision* on the *neutral category* with 87.1 %. We should select this classifier if misclassifying tweets as neutral is highly costly. 
+
+- MNB classifier using Trigrams as Feature Vectors gave us the *highest recall* on the *offensive language category* with 72.61 %. We sould select this classifier if missing offensive language tweets is highly costly. SVM using Trigrams as Feature Vectors give us the *highest precision* on the *offensive language category* with 67.52 %. We should select this classifier if misclassifying tweets as offensive language is highly costly.
+
+- SVM classifier using Unigrams as Feature Vectors gave us the *highest recall* and *highest precision* on the *hate speech category* with 64.09 % and 44.69 %, respectively. We should consider this classifier if detection of hate speech tweets is the most important factor in our classification problem. 
+
+- For demonstration, we assume that *hate speech* detection is the most important criteria and therefore we select the *SVM-Unigram* classifier for service implementation on MonkeyLearn to compute the predictions for the unlabeled data. Furthermore, this classifier provides the *highest F1 score* for the three label categories, which is a metric that combines the category precision and recall. 
+
+- The R script in the file *ComputePredictionsUnlabeled.R* uses the selected model, which is implemented as a MonkeyLearn service, to compute the predictions on the unlabeled data. It also includes information about the service specifications, such as the request headers and the service endpoint. The CSV file *UnlabeledDataPredictions.csv* contains the IDs of the unlabeled tweets as well as their predicted classes and the prediction probabilities as provided by the implemented model.    
+
+####Weight optimization for 'hate_speech' category 
+
+There are a number of methods that can be used to give more importance to a specific label category performance (precision / recall) for e.g. *hate_speech*. One method is to treat the model as a probabilistic classifier and change the prediction probability threshold for the category of interest. As both the Multinomial Naive Bayes and Support Vector Machines algorithms provide a probability for the tweet to belong to each of the candidate classes, we can:
+
+-Improve the *precision* of the *hate speech* class by increasing the threshold where the classifier determines that the tweet is to be classified to that class, thus reducing the *false positive* rate of that category. 
+
+- Improve the *recall* of the *hate speech* class by decreasing the threshold where the classifier determines that the tweet is to be classified to that class, thus reducing the *false negative* rate of that category.
+
+####Confidence intervals for the unseen data predictions 
+
+As discussed in the previous section, both the  Multinomial Naive Bayes and Support Vector Machines algorithms provide a probability for the tweet to belong to each of the candidate classes. Given the assumption that these probabilities form a normal distribution, the lowerbound and upperbound probabilities of the (e.g. 95%) confidence interval for each label category can be defined as:
+
+*lbd = x - (z X SE)*
+
+and
+
+*ubd = x + (z X SE)*
+
+where:
+
+- lbd: the lowerbound probability for the label category
+
+- ubd: the upperbound probability for the label category
+
+- x: the mean of the label category probabilities. 
+
+- z: the critical value (equals 1.96 for a 95% confidence level)
+
+- SE: The Standard Error for the label category, which equals:
+
+*SE = s / sqrt(n)*
+
+where:
+
+- s: the standard deviation of the label category probabilities.
+
+- n: the number of tweets assigned to the label category. 
+
+##Continuous Improvement
+
+###Training / Validation Data Collection Approaches
+
+- Crowdsourcing Platforms / APIs: [CrowdFlower](https://www.crowdflower.com/) is a software as a service platform that allows users to access an online workforce of millions of people to clean, label and enrich data. Tweets can be uploaded, annotated by the crowd and retrieved back from crowdsourcing jobs using the [CrowdFlower API](https://success.crowdflower.com/hc/en-us/articles/202703445-Integrating-with-the-API) in an automated fashion.   
+
+- Using the *Wisdom of the Crowd*: For example, Twitter users can annotate tweets with hashtags to indicate an underlying topic, event, or opinion. Public tweets can be streamed in an automated fashion by tracking keyword / hashtag filters such as #HateSpeech and #OffensiveLanguage using the Twitter Streaming API. These can be used to enrich the crowdsourced tweets, where the hashtags can be used as the labels whereas the text JSON key of the tweets to be used as the tweet content. 
+
+- Using a [boot-strapping training](http://tinyurl.com/gmyxjmr) approach: First, obtain the first version of the classifier by training the model using the crowdsourced tweets. Second, use the first version of the classifier to score additional examples that can be used enrich the initial training set for training a better classifier. Third, feed the scored tweets into a second crowdsourcing job. Fourth, enrich the initial training set with tweets that have matching annotations from both the initial classifier and the crowdsourcing job, and disregard the tweets that have a mismatching annotations. Fifth, use the enriched training set to train a second version model. Sixth, repeat steps 2-5 iteratively until we obtain a satisfactory matching proportion between the automated classifications and crowdsourced annotations.    
+
