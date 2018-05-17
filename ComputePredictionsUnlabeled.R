@@ -63,10 +63,10 @@ df_unlabeled_tweets$predictedClassProb <- rep(0.0,nrow(df_unlabeled_tweets))
 
 #Classify the unlabeled data (text column) through the MonkeyLearn API using the selected model
 #classifier Name: NLPTest
-#classifier URL: https://app.monkeylearn.com/main/classifiers/cl_znZbrRDB/tab/tree-sandbox
-#Classifer_ID: cl_znZbrRDB
-#Authorization: Token 607ea0e572594ce3e222c1b643b29abb539fb213
-#Service endpoint URL: https://api.monkeylearn.com/v2/classifiers/cl_znZbrRDB/classify/?sandbox=1
+#classifier URL: https://app.monkeylearn.com/main/classifiers/XXX/tab/tree-sandbox
+#Classifer_ID: XXX
+#Authorization: Token XXX
+#Service endpoint URL: https://api.monkeylearn.com/v2/classifiers/XXX/classify/?sandbox=1
 #send 200 tweets with every request (Free version usage limit)
 #sleep for 65 seconds every 4000 classifications (Free version usage limit)
 
@@ -80,9 +80,9 @@ for (i in 1:nrow(df_unlabeled_tweets)) {
   if (i %% 200 == 0 | i == nrow(df_unlabeled_tweets)) {
     tweets <- c(tweets, df_unlabeled_tweets[df_unlabeled_tweets$no == i,c("text")])
     x= list(text_list=tweets)
-    headers <- list('Authorization' = "Token 607ea0e572594ce3e222c1b643b29abb539fb213", 
+    headers <- list('Authorization' = "XXX", 
                     'Content-Type' = 'application/json')
-    response <- postForm("https://api.monkeylearn.com/v2/classifiers/cl_znZbrRDB/classify/?sandbox=1", 
+    response <- postForm("https://api.monkeylearn.com/v2/classifiers/XXX/classify/?sandbox=1", 
                          .opts=list(postfields=toJSON(x), httpheader=headers))
     
     responseJson <- fromJSON(response)
